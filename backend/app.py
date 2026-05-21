@@ -204,8 +204,16 @@ def create_news():
     except Error:
         return jsonify({"error": "Error de base de datos"}), 500
 
+@app.route('/api/auth/me', methods=['GET'])
+def me():
+    user, error = verify_role_and_session(request, allowed_roles=[1, 2, 3, 4])
+    if error:
+        return jsonify({"error": error}), 401
+    return jsonify({"id": user['id'], "role_id": user['role_id'], "username": "..."})
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 # --- CU-04: SISTEMA DE COMENTARIOS ---
 @app.route('/api/comments', methods=['POST'])
 def add_comment():
