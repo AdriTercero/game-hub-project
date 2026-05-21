@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-page="blog">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post — GameHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23D97757'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='white'>GH</text></svg>">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">GH</div>
+      <div>
+        <div class="nav-logo-text">GameHub</div>
+        <small>gamehub.io</small>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav.inicio">Inicio</a>
+      <a href="catalogo.html" data-i18n="nav.catalogo">Catálogo</a>
+      <a href="noticias.html" data-i18n="nav.noticias">Noticias</a>
+      <a href="blog.html" class="active" data-i18n="nav.blog">Blog</a>
+      <a href="multimedia.html" data-i18n="nav.multimedia">Multimedia</a>
+      <a href="agenda.html" data-i18n="nav.agenda">Agenda</a>
+      <a href="#" class="open-equipo" data-i18n="nav.equipo">Equipo</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle">☀️</button>
+      <span class="nav-lang" data-i18n="nav.lang">ES / EN</span>
+      <button class="btn-ghost" onclick="location.href='login.html'" data-i18n="nav.login">Iniciar sesión</button>
+      <button class="btn-primary" onclick="location.href='register.html'" data-i18n="nav.registro">Registro</button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- POST WRAPPER -->
+  <div class="post-wrap">
+
+    <!-- BACK LINK -->
+    <a href="blog.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span data-i18n="post.back">Volver al blog</span>
+    </a>
+
+    <!-- POST HEADER -->
+    <header class="post-header">
+      <div class="post-meta-top">
+        <span class="post-cat opinion" data-i18n="blog.filter.opinion">Opinión</span>
+        <span class="post-reading-time">⏱ <span data-i18n="post.readtime">8 min lectura</span></span>
+      </div>
+
+      <h1 class="post-title">El futuro de los videojuegos AAA: entre la crisis creativa y la oportunidad del indie</h1>
+
+      <div class="post-byline">
+        <div class="post-author-block">
+          <div class="post-avatar-lg" style="background:#D97757">R1</div>
+          <div class="post-author-info">
+            <span class="post-author-name">Redactor 1</span>
+            <span class="post-author-role" data-i18n="blog.author.role">Redactor senior</span>
+          </div>
+        </div>
+        <div class="post-byline-right">
+          <span class="post-date">📅 12 mayo 2026</span>
+          <span class="post-comment-count">💬 24 <span data-i18n="blog.comments">comentarios</span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO IMAGE -->
+    <div class="post-hero">
+      <div class="post-hero-bg ph1"></div>
+    </div>
+
+    <!-- ARTICLE BODY -->
+    <article class="post-body">
+
+      <p class="post-lead">La industria del videojuego está en un punto de inflexión. Los grandes estudios se enfrentan a costes de desarrollo desorbitados mientras el mercado indie florece con propuestas más arriesgadas y personales. ¿Hacia dónde vamos?</p>
+
+      <h2>El problema de escala</h2>
+      <p>Los presupuestos de los grandes títulos AAA han alcanzado cifras que hace una década habrían parecido imposibles. Producciones que superan los 200 millones de dólares en desarrollo y otros tantos en marketing crean una presión enorme sobre los estudios: el margen de error es prácticamente inexistente.</p>
+      <p>Esta situación genera un efecto paradójico: cuanto mayor es la inversión, menor es el riesgo que el estudio puede permitirse asumir. El resultado es una homogeneización del catálogo AAA donde las mecánicas probadas, las franquicias establecidas y los géneros con audiencia garantizada dominan el mercado.</p>
+
+      <h2>El auge del indie como respuesta</h2>
+      <p>Frente a este panorama, el mercado independiente ha experimentado un crecimiento sostenido. Títulos como <em>Hollow Knight</em>, <em>Celeste</em> o <em>Hades</em> demostraron que es posible crear experiencias memorables con equipos reducidos y presupuestos modestos, siempre que la visión creativa sea sólida.</p>
+      <p>La democratización de las herramientas de desarrollo —Unity, Unreal Engine, Godot— ha reducido la barrera de entrada técnica de forma drástica. Lo que antes requería decenas de ingenieros hoy puede ser abordado por un equipo de cinco personas con las habilidades adecuadas.</p>
+
+      <blockquote>
+        <p>«El juego indie no es el futuro del videojuego. Es el presente de una industria que ha recuperado el valor de la autenticidad.»</p>
+      </blockquote>
+
+      <h2>¿Son compatibles los dos modelos?</h2>
+      <p>La pregunta real no es si el indie va a reemplazar al AAA, sino si la industria puede sostener ambos ecosistemas de forma saludable. Los indicios apuntan a que sí, pero con matices importantes.</p>
+      <p>Los grandes estudios están comenzando a explorar modelos híbridos: publicadoras que financian proyectos indie bajo su paraguas, divisiones internas con mayor autonomía creativa, y experimentos con equipos reducidos trabajando en paralelo a las producciones principales.</p>
+      <p>El problema de fondo sigue siendo el mismo: los incentivos económicos del modelo AAA penalizan la innovación. Hasta que eso no cambie estructuralmente, el indie seguirá siendo el espacio donde ocurren las cosas más interesantes de la industria.</p>
+
+      <h2>Conclusión</h2>
+      <p>El videojuego como medio ha madurado lo suficiente como para albergar múltiples modelos de negocio y formas de hacer. La crisis creativa del AAA no es el fin de nada —es una oportunidad para que la industria se replantee sus prioridades y encuentre nuevos equilibrios entre la ambición comercial y la autenticidad artística.</p>
+
+    </article>
+
+    <!-- TAGS -->
+    <div class="post-tags">
+      <span class="post-tag">Industria</span>
+      <span class="post-tag">AAA</span>
+      <span class="post-tag">Indie</span>
+      <span class="post-tag">Desarrollo</span>
+    </div>
+
+    <!-- SHARE -->
+    <div class="post-share">
+      <span class="post-share-label" data-i18n="post.share">Compartir</span>
+      <button class="share-btn-social" onclick="navigator.share ? navigator.share({title: document.title, url: location.href}) : navigator.clipboard.writeText(location.href)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <span data-i18n="post.share.copy">Copiar enlace</span>
+      </button>
+    </div>
+
+    <hr class="post-divider">
+
+    <!-- COMMENTS SECTION -->
+    <section class="comments-section">
+      <h2 class="comments-title">
+        <span data-i18n="post.comments.title">Comentarios</span>
+        <span class="comments-count">24</span>
+      </h2>
+
+      <!-- Comment form — only for logged-in subscribers -->
+      <!-- Estado simulado: cambia `data-logged="false"` a `data-logged="true"` para ver el formulario -->
+      <div class="comment-form-wrap" id="commentFormWrap" data-logged="false">
+
+        <!-- NOT logged in -->
+        <div class="comment-cta" id="commentCta">
+          <div class="comment-cta-icon">💬</div>
+          <p class="comment-cta-text" data-i18n="post.comments.cta">Inicia sesión para participar en la conversación.</p>
+          <div class="comment-cta-btns">
+            <button class="btn-cta-primary" onclick="location.href='login.html'" data-i18n="nav.login">Iniciar sesión</button>
+            <button class="btn-cta-ghost" onclick="location.href='register.html'" data-i18n="nav.registro">Registro</button>
+          </div>
+        </div>
+
+        <!-- Logged in (hidden by default) -->
+        <div class="comment-form" id="commentForm" style="display:none">
+          <div class="comment-form-header">
+            <div class="post-avatar-lg" style="background:#D97757;width:36px;height:36px;font-size:13px">MG</div>
+            <span class="comment-form-user">María García</span>
+          </div>
+          <textarea class="comment-textarea" id="commentInput" placeholder="Escribe tu comentario…" rows="3"></textarea>
+          <div class="comment-form-footer">
+            <span class="comment-form-hint" data-i18n="post.comments.hint">Solo visible para usuarios registrados</span>
+            <button class="comment-submit" id="commentSubmit" data-i18n="post.comments.submit">Publicar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments list -->
+      <div class="comments-list" id="commentsList">
+
+        <div class="comment-item">
+          <div class="comment-avatar" style="background:#3a6eb0">U1</div>
+          <div class="comment-body">
+            <div class="comment-meta">
+              <span class="comment-author">Usuario 1</span>
+              <span class="comment-date">hace 2h</span>
+            </div>
+            <p class="comment-text">Totalmente de acuerdo con el análisis. Los estudios AAA han perdido la capacidad de sorprender porque el riesgo financiero es demasiado alto. El indie tiene esa libertad que el gran presupuesto no permite.</p>
+            <div class="comment-actions">
+              <button class="comment-like" data-liked="false" onclick="toggleLike(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                <span>8</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="comment-item">
+          <div class="comment-avatar" style="background:#5B8C5A">U2</div>
+          <div class="comment-body">
+            <div class="comment-meta">
+              <span class="comment-author">Usuario 2</span>
+              <span class="comment-date">hace 5h</span>
+            </div>
+            <p class="comment-text">Creo que el problema es más profundo. No es solo el presupuesto, es la cultura corporativa de los grandes estudios. Cuando el miedo a fallar supera al deseo de crear, el resultado siempre es mediocre.</p>
+            <div class="comment-actions">
+              <button class="comment-like" data-liked="false" onclick="toggleLike(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                <span>14</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="comment-item">
+          <div class="comment-avatar" style="background:#8A5BAD">U3</div>
+          <div class="comment-body">
+            <div class="comment-meta">
+              <span class="comment-author">Usuario 3</span>
+              <span class="comment-date">hace 1d</span>
+            </div>
+            <p class="comment-text">Interesante perspectiva, aunque discrepo en parte. Hay AAAs recientes que han demostrado que la escala y la creatividad pueden convivir. El problema no es el presupuesto sino la dirección artística.</p>
+            <div class="comment-actions">
+              <button class="comment-like" data-liked="false" onclick="toggleLike(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                <span>6</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/i18n.js" defer></script>
+  <script src="js/base.js" defer></script>
+  <script src="js/post.js" defer></script>
+  <script src="js/modals.js" defer></script>
+</body>
+</html>

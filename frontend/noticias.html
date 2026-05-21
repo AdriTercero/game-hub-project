@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-page="noticias">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticias — GameHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/noticias.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23D97757'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='white'>GH</text></svg>">
+</head>
+<body>
+<!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">GH</div>
+      <div>
+        <div class="nav-logo-text">GameHub</div>
+        <small>gamehub.io</small>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav.inicio">Inicio</a>
+      <a href="catalogo.html" data-i18n="nav.catalogo">Catálogo</a>
+      <a href="noticias.html" class="active" data-i18n="nav.noticias">Noticias</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="multimedia.html" data-i18n="nav.multimedia">Multimedia</a>
+      <a href="agenda.html" data-i18n="nav.agenda">Agenda</a>
+      <a href="equipo.html" data-i18n="nav.equipo">Equipo</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle">☀️</button>
+      <span class="nav-lang" data-i18n="nav.lang">ES / EN</span>
+      <button class="btn-ghost" onclick="location.href='login.html'" data-i18n="nav.login">Iniciar sesión</button>
+      <button class="btn-primary" onclick="location.href='register.html'" data-i18n="nav.registro">Registro</button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1 class="page-title" data-i18n="noticias.title">Noticias y <em>actualidad</em></h1>
+    <p class="page-subtitle" data-i18n="noticias.subtitle">Novedades del sector, avances tecnológicos y tendencias</p>
+
+    <!-- FILTERS -->
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-cat="todas" data-i18n="noticias.filter.todas">Todas</button>
+      <button class="filter-btn" data-cat="industria" data-i18n="noticias.filter.industria">Industria</button>
+      <button class="filter-btn" data-cat="tecnologia" data-i18n="noticias.filter.tech">Tecnología</button>
+      <button class="filter-btn" data-cat="esports" data-i18n="noticias.filter.esports">eSports</button>
+      <button class="filter-btn" data-cat="resenas" data-i18n="noticias.filter.resenas">Reseñas</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content-wrap">
+
+    <!-- FEATURED + SIDE -->
+    <div class="featured-grid reveal">
+
+      <!-- Featured article -->
+      <article class="featured-main" onclick="location.href='noticia.html'">
+        <div class="featured-bg"></div>
+        <div class="featured-body">
+          <div class="featured-badge" data-i18n="noticias.featured.badge">★ Destacada</div>
+          <div class="featured-cat">Industria · 5 mayo 2026</div>
+          <h2 class="featured-title">Titular destacado de la noticia principal del día sobre la industria del videojuego</h2>
+          <div class="featured-meta">
+            <span>✍ Redactor Principal</span>
+            <span>👁 320 lecturas</span>
+            <span>💬 14 comentarios</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Secondary articles -->
+      <div class="featured-side">
+        <article class="side-card" onclick="location.href='noticia.html'">
+          <div class="side-img"><div class="side-img-bg si1"></div></div>
+          <div class="side-body">
+            <div class="side-cat" data-i18n="noticias.cat.industria">Industria</div>
+            <div class="side-title">Titular secundario 1 sobre novedades en la industria</div>
+          </div>
+        </article>
+        <article class="side-card" onclick="location.href='noticia.html'">
+          <div class="side-img"><div class="side-img-bg si2"></div></div>
+          <div class="side-body">
+            <div class="side-cat" data-i18n="noticias.cat.tech">Tecnología</div>
+            <div class="side-title">Titular secundario 2 sobre avances tecnológicos</div>
+          </div>
+        </article>
+        <article class="side-card" onclick="location.href='noticia.html'">
+          <div class="side-img"><div class="side-img-bg si3"></div></div>
+          <div class="side-body">
+            <div class="side-cat" data-i18n="noticias.filter.resenas">Reseñas</div>
+            <div class="side-title">Titular secundario 3 sobre análisis y reseñas</div>
+          </div>
+        </article>
+        <article class="side-card" onclick="location.href='noticia.html'">
+          <div class="side-img"><div class="side-img-bg si4"></div></div>
+          <div class="side-body">
+            <div class="side-cat" data-i18n="noticias.filter.esports">eSports</div>
+            <div class="side-title">Titular secundario 4 sobre torneos y competiciones</div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- MORE NEWS -->
+    <div class="more-header">
+      <h2 class="more-title" data-i18n="noticias.more.title">Más <em>noticias</em></h2>
+      <span class="more-count" id="resultCount">6 artículos</span>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+
+      <article class="news-card visible reveal" data-cat="industria" onclick="location.href='noticia.html'">
+        <div class="news-img"><div class="news-img-bg ni1"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-cat" data-i18n="noticias.cat.industria">Industria</span><span class="news-time">hace 2h</span></div>
+          <div class="news-title">Titular 1 sobre novedades en la industria del videojuego</div>
+          <div class="news-footer">
+            <span class="news-author">por Redactor 1</span>
+            <div class="news-stats"><span>👁 210</span><span>💬 8</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card visible reveal" data-cat="tecnologia" onclick="location.href='noticia.html'" style="animation-delay:0.05s">
+        <div class="news-img"><div class="news-img-bg ni2"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-cat" data-i18n="noticias.cat.tech">Tecnología</span><span class="news-time">hace 3h</span></div>
+          <div class="news-title">Titular 2 sobre avances tecnológicos y tendencias del sector</div>
+          <div class="news-footer">
+            <span class="news-author">por Redactor 2</span>
+            <div class="news-stats"><span>👁 185</span><span>💬 5</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card visible reveal" data-cat="resenas" onclick="location.href='noticia.html'" style="animation-delay:0.1s">
+        <div class="news-img"><div class="news-img-bg ni3"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-cat" data-i18n="noticias.filter.resenas">Reseñas</span><span class="news-time">hace 4h</span></div>
+          <div class="news-title">Titular 3 sobre análisis en profundidad de lanzamientos recientes</div>
+          <div class="news-footer">
+            <span class="news-author">por Redactor 3</span>
+            <div class="news-stats"><span>👁 142</span><span>💬 12</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card visible reveal" data-cat="esports" onclick="location.href='noticia.html'" style="animation-delay:0.15s">
+        <div class="news-img"><div class="news-img-bg ni4"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-cat" data-i18n="noticias.filter.esports">eSports</span><span class="news-time">hace 5h</span></div>
+          <div class="news-title">Titular 4 sobre torneos internacionales y resultados de competición</div>
+          <div class="news-footer">
+            <span class="news-author">por Redactor 1</span>
+            <div class="news-stats"><span>👁 298</span><span>💬 20</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card visible reveal" data-cat="industria" onclick="location.href='noticia.html'" style="animation-delay:0.2s">
+        <div class="news-img"><div class="news-img-bg ni5"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-cat" data-i18n="noticias.cat.industria">Industria</span><span class="news-time">hace 6h</span></div>
+          <div class="news-title">Titular 5 sobre movimientos corporativos y adquisiciones en el sector</div>
+          <div class="news-footer">
+            <span class="news-author">por Redactor 2</span>
+            <div class="news-stats"><span>👁 167</span><span>💬 3</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card visible reveal" data-cat="tecnologia" onclick="location.href='noticia.html'" style="animation-delay:0.25s">
+        <div class="news-img"><div class="news-img-bg ni6"></div></div>
+        <div class="news-body">
+          <div class="news-meta"><span class="news-cat" data-i18n="noticias.cat.tech">Tecnología</span><span class="news-time">hace 7h</span></div>
+          <div class="news-title">Titular 6 sobre nuevas herramientas de desarrollo y motores gráficos</div>
+          <div class="news-footer">
+            <span class="news-author">por Redactor 3</span>
+            <div class="news-stats"><span>👁 113</span><span>💬 6</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- No results placeholder -->
+      <div class="no-results" id="noResults">
+        <div class="no-results-icon">🔍</div>
+        <span data-i18n="noticias.no_results">No hay noticias en esta categoría todavía.</span>
+      </div>
+
+    </div>
+
+    <!-- LOAD MORE -->
+    <div class="load-more-wrap">
+      <button class="btn-load-more" id="btnLoadMore" data-i18n="noticias.load_more">Cargar más noticias</button>
+    </div>
+
+  </div>
+
+  <script src="js/i18n.js" defer></script>
+  <script src="js/base.js" defer></script>
+  <script src="js/noticias.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-page="register">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear cuenta — GameHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/register.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23D97757'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='white'>GH</text></svg>">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">GH</div>
+      <div>
+        <div class="nav-logo-text">GameHub</div>
+        <small>gamehub.io</small>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav.inicio">Inicio</a>
+      <a href="catalogo.html" data-i18n="nav.catalogo">Catálogo</a>
+      <a href="noticias.html" data-i18n="nav.noticias">Noticias</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="multimedia.html" data-i18n="nav.multimedia">Multimedia</a>
+      <a href="agenda.html" data-i18n="nav.agenda">Agenda</a>
+      <a href="equipo.html" data-i18n="nav.equipo">Equipo</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle">☀️</button>
+      <span class="nav-lang" data-i18n="nav.lang">ES / EN</span>
+      <button class="btn-ghost" onclick="location.href='login.html'" data-i18n="nav.login">Iniciar sesión</button>
+      <button class="btn-primary" onclick="location.href='register.html'" data-i18n="nav.registro">Registro</button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <main class="page-body">
+    <div class="register-card" id="registerCard">
+
+      <div class="card-logo">
+        <div class="card-logo-icon">GH</div>
+      </div>
+
+      <h1 class="card-title" data-i18n="register.title">Crear cuenta</h1>
+      <p class="card-subtitle" data-i18n="register.subtitle">Únete a la comunidad GameHub</p>
+
+      <!-- Alerts -->
+      <div class="alert alert-error" id="alertError" role="alert">
+        <svg class="alert-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="alertErrorText" data-i18n="register.error.general">Corrige los errores antes de continuar.</span>
+      </div>
+      <div class="alert alert-success" id="alertSuccess" role="status">
+        <svg class="alert-icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span data-i18n="register.success">¡Cuenta creada! Revisa tu email para confirmarla. Redirigiendo al login...</span>
+      </div>
+
+      <form id="registerForm" novalidate>
+
+        <!-- Nombre -->
+        <div class="form-group">
+          <label class="form-label" for="fullname" data-i18n="register.nombre.label">Nombre y apellidos</label>
+          <input class="form-input" type="text" id="fullname" placeholder="María García" data-i18n-placeholder="register.nombre.placeholder" autocomplete="name" required>
+          <span class="form-hint error-hint" id="hintName" data-i18n="register.error.nombre">Introduce tu nombre completo (mín. 2 caracteres).</span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="email" data-i18n="register.email.label">Email</label>
+          <input class="form-input" type="email" id="email" placeholder="maria@example.com" data-i18n-placeholder="register.email.placeholder" autocomplete="email" required>
+          <span class="form-hint error-hint" id="hintEmail" data-i18n="register.error.email">Introduce un email válido.</span>
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+          <label class="form-label" for="username" data-i18n="register.user.label">Nombre de usuario</label>
+          <div class="input-wrap">
+            <input class="form-input" type="text" id="username" placeholder="@gamergirl" data-i18n-placeholder="register.user.placeholder" autocomplete="username" required>
+          </div>
+          <span class="form-hint" data-i18n="register.user.hint">Solo letras, números y guiones bajos. Mín. 3 caracteres.</span>
+          <span class="form-hint error-hint" id="hintUser" data-i18n="register.error.user">Nombre de usuario no válido (mín. 3 caracteres, sin espacios).</span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="password" data-i18n="register.pass.label">Contraseña</label>
+          <div class="input-wrap">
+            <input class="form-input has-toggle" type="password" id="password" placeholder="••••••••" data-i18n-placeholder="register.pass.placeholder" autocomplete="new-password" required>
+            <button type="button" class="toggle-pass" id="togglePass1" aria-label="Mostrar contraseña">
+              <svg id="eye1Show" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg id="eye1Hide" viewBox="0 0 24 24" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+          <div class="strength-wrap" id="strengthWrap">
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <span class="strength-label" id="strengthLabel"></span>
+          </div>
+          <span class="form-hint error-hint" id="hintPass" data-i18n="register.error.pass">Mín. 8 caracteres, 1 mayúscula y 1 número.</span>
+        </div>
+
+        <!-- Confirm password -->
+        <div class="form-group">
+          <label class="form-label" for="confirm" data-i18n="register.confirm.label">Confirmar contraseña</label>
+          <div class="input-wrap">
+            <input class="form-input has-toggle" type="password" id="confirm" placeholder="••••••••" data-i18n-placeholder="register.confirm.placeholder" autocomplete="new-password" required>
+            <button type="button" class="toggle-pass" id="togglePass2" aria-label="Mostrar contraseña">
+              <svg id="eye2Show" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg id="eye2Hide" viewBox="0 0 24 24" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+          <span class="form-hint error-hint" id="hintConfirm" data-i18n="register.error.confirm">Las contraseñas no coinciden.</span>
+        </div>
+
+        <!-- Role info -->
+        <div class="role-box">
+          <span class="role-icon">👤</span>
+          <div class="role-text">
+            <span data-i18n="register.role.text">Te registras como</span> <strong data-i18n="register.role.value">Suscriptor (por defecto)</strong>.<br>
+            <span data-i18n="register.role.admin">Un administrador puede cambiar tu rol posteriormente.</span>
+          </div>
+        </div>
+
+        <!-- Terms -->
+        <label class="checkbox-label" id="termsLabel">
+          <input type="checkbox" id="terms">
+          <span class="checkbox-box">
+            <svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+          </span>
+          <span data-i18n="register.terms">Acepto los</span> <a href="#" class="open-tos" data-i18n="register.terms.link1">términos</a> <span data-i18n="register.terms.y">y la</span> <a href="#" class="open-privacidad" data-i18n="register.terms.link2">política de privacidad</a>
+        </label>
+
+        <button type="submit" class="btn-submit" id="btnSubmit" data-i18n="register.submit">Crear cuenta</button>
+
+      </form>
+
+      <p class="login-link">
+        <span data-i18n="register.ya_cuenta">¿Ya tienes cuenta?</span> <a href="login.html" data-i18n="register.login">Inicia sesión</a>
+      </p>
+
+    </div>
+  </main>
+  
+    <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <div class="footer-logo">GH</div>
+      <span class="footer-copy" data-i18n="footer.copy">GameHub © 2026</span>
+    </div>
+    <div class="footer-links">
+	  <a href="#" class="open-sobre" data-i18n="footer.sobre">Sobre</a>
+	  <a href="#" class="open-equipo" data-i18n="footer.equipo">Equipo</a>
+	  <a href="#" class="open-contacto" data-i18n="footer.contacto">Contacto</a>
+	  <a href="#" class="open-privacidad" data-i18n="footer.privacidad">Privacidad</a>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js" defer></script>
+  <script src="js/base.js" defer></script>
+  <script src="js/register.js" defer></script>
+  <script src="js/modals.js" defer></script>
+</body>
+</html>

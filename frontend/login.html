@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-page="login">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión — GameHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23D97757'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='white'>GH</text></svg>">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">GH</div>
+      <div>
+        <div class="nav-logo-text">GameHub</div>
+        <small>gamehub.io</small>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav.inicio">Inicio</a>
+      <a href="catalogo.html" data-i18n="nav.catalogo">Catálogo</a>
+      <a href="noticias.html" data-i18n="nav.noticias">Noticias</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="multimedia.html" data-i18n="nav.multimedia">Multimedia</a>
+      <a href="agenda.html" data-i18n="nav.agenda">Agenda</a>
+      <a href="#" class="open-equipo" data-i18n="nav.equipo">Equipo</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" title="Cambiar tema">☀️</button>
+      <span class="nav-lang" data-i18n="nav.lang">ES / EN</span>
+      <button class="btn-ghost" onclick="window.location='login.html'" data-i18n="nav.login">Iniciar sesión</button>
+      <button class="btn-primary" onclick="window.location='register.html'" data-i18n="nav.registro">Registro</button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE BODY -->
+  <main class="page-body">
+    <div class="login-card" id="loginCard">
+
+      <!-- Logo -->
+      <div class="card-logo">
+        <div class="card-logo-icon">GH</div>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="card-title" data-i18n="login.title">Iniciar sesión</h1>
+      <p class="card-subtitle" data-i18n="login.subtitle">Bienvenido de nuevo</p>
+
+      <!-- Error alert -->
+      <div class="alert alert-error" id="alertError" role="alert">
+        <svg class="alert-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="alertText" data-i18n="login.error.credenciales">Email o contraseña incorrectos.</span>
+      </div>
+
+      <!-- Lockout box (hidden until 5 fails) -->
+      <div class="lockout-box" id="lockoutBox">
+        <div class="lockout-icon">🔒</div>
+        <div class="lockout-title" data-i18n="login.lockout.title">Cuenta bloqueada temporalmente</div>
+        <div class="lockout-text" data-i18n="login.lockout.text">Has superado el límite de 5 intentos fallidos.<br>Podrás volver a intentarlo en:</div>
+        <div class="lockout-timer" id="lockoutTimer">5:00</div>
+      </div>
+
+      <!-- FORM -->
+      <form id="loginForm" novalidate>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="email" data-i18n="login.email.label">Email</label>
+          <div class="input-wrap">
+            <input
+              class="form-input"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="user@example.com"
+              data-i18n-placeholder="login.email.placeholder"
+              autocomplete="email"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="password" data-i18n="login.pass.label">Contraseña</label>
+          <div class="input-wrap">
+            <input
+              class="form-input has-toggle"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              data-i18n-placeholder="login.pass.placeholder"
+              autocomplete="current-password"
+              required
+            >
+            <button type="button" class="toggle-pass" id="togglePass" aria-label="Mostrar contraseña">
+              <svg id="eyeShow" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg id="eyeHide" viewBox="0 0 24 24" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Remember + Forgot -->
+        <div class="form-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="remember" name="remember">
+            <span class="checkbox-box">
+              <svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+            </span>
+            <span data-i18n="login.remember">Recordarme</span>
+          </label>
+          <a href="#" class="forgot-link" data-i18n="login.forgot">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <!-- Attempt counter (shows after 1st fail) -->
+        <div class="attempt-info" id="attemptInfo"></div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-submit" id="btnSubmit" data-i18n="login.submit">Entrar</button>
+
+      </form>
+
+      <!-- Register link -->
+      <p class="register-link">
+        <span data-i18n="login.no_cuenta">¿No tienes cuenta?</span> <a href="register.html" data-i18n="login.registrate">Regístrate</a>
+      </p>
+
+    </div>
+  </main>
+    <footer>
+    <div class="footer-left">
+      <div class="footer-logo">GH</div>
+      <span class="footer-copy" data-i18n="footer.copy">GameHub © 2026</span>
+    </div>
+    <div class="footer-links">
+      <a href="#" data-i18n="footer.sobre">Sobre</a>
+      <a href="#" data-i18n="footer.equipo">Equipo</a>
+      <a href="#" data-i18n="footer.contacto">Contacto</a>
+      <a href="#" data-i18n="footer.privacidad">Privacidad</a>
+    </div>
+  </footer>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/base.js" defer></script>
+  <script src="js/login.js" defer></script>
+  <script src="js/modals.js" defer></script>
+</body>
+</html>

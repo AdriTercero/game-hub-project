@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-page="dashboard">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard · Administrador — GameHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/dashboard-admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23D97757'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='white'>GH</text></svg>">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-logo">
+      <a href="index.html" class="topbar-logo-link">
+        <div class="logo-icon">GH</div>
+        <span class="logo-text">GameHub</span>
+      </a>
+    </div>
+    <div class="topbar-center">
+      <div class="topbar-search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="Buscar…" autocomplete="off">
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="role-badge admin"><span class="role-dot"></span>Administrador</div>
+      <span class="topbar-lang">ES / EN</span>
+      <button class="theme-toggle" id="themeToggle">☀️</button>
+      <div class="user-avatar" title="Admin">AD</div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Principal</span>
+        <div class="nav-item active" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Resumen
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Usuarios</span>
+        <div class="nav-item nav-item--highlight" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Gestión de usuarios
+          <span class="nav-badge">1.2k</span>
+        </div>
+        <div class="nav-item" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Roles & permisos
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Contenido</span>
+        <div class="nav-item" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>
+          Noticias & Blog
+        </div>
+        <div class="nav-item" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Catálogo juegos
+        </div>
+        <div class="nav-item" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Agenda
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Moderación</span>
+        <div class="nav-item" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Comentarios
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Sistema</span>
+        <div class="nav-item" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Logs
+        </div>
+        <div class="nav-item" onclick="setActive(this)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+          Ajustes
+        </div>
+        <div class="nav-item logout" onclick="location.href='index.html'">
+          <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Cerrar sesión
+        </div>
+      </div>
+
+      <div class="sidebar-user">
+        <div class="sidebar-user-card">
+          <div class="sidebar-avatar admin">AD</div>
+          <div style="min-width:0">
+            <div class="sidebar-user-name">Administrador</div>
+            <div class="sidebar-user-role">● Admin</div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Gestión de <em>usuarios</em></h1>
+          <p class="page-sub">CU-05 · Crear, editar roles, suspender o eliminar</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn-export" onclick="exportCSV()">↓ Exportar CSV</button>
+          <button class="btn-new" onclick="openModal('create')">+ Nuevo usuario</button>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon">👥</div>
+          <div class="kpi-label">Total usuarios</div>
+          <div class="kpi-value-row">
+            <div class="kpi-value">1,248</div>
+            <span class="kpi-delta">+34</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">🔔</div>
+          <div class="kpi-label">Suscriptores</div>
+          <div class="kpi-value-row"><div class="kpi-value">1,180</div></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">✍️</div>
+          <div class="kpi-label">Redactores</div>
+          <div class="kpi-value-row"><div class="kpi-value">22</div></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">🚫</div>
+          <div class="kpi-label">Suspendidos</div>
+          <div class="kpi-value-row">
+            <div class="kpi-value" id="suspendedCount">12</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table controls -->
+      <div class="table-controls">
+        <div class="table-search-wrap">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="tableSearch" placeholder="Buscar por email, usuario…" autocomplete="off">
+        </div>
+        <select class="table-filter" id="filterRol">
+          <option value="">Rol: todos</option>
+          <option value="Suscriptor">Suscriptor</option>
+          <option value="Colaborador">Colaborador</option>
+          <option value="Redactor">Redactor</option>
+          <option value="Administrador">Administrador</option>
+        </select>
+        <select class="table-filter" id="filterEstado">
+          <option value="">Estado: todos</option>
+          <option value="Activo">Activos</option>
+          <option value="Suspendido">Suspendidos</option>
+        </select>
+      </div>
+
+      <!-- User table -->
+      <div class="table-wrap">
+        <table class="user-table" id="userTable">
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Rol</th>
+              <th>Estado</th>
+              <th>Registrado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Filled by JS -->
+          </tbody>
+        </table>
+        <div class="table-empty" id="tableEmpty" style="display:none">
+          <div style="font-size:32px;margin-bottom:10px">🔍</div>
+          <div>Ningún usuario coincide con los filtros</div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
+
+    </main>
+  </div>
+
+  <!-- ── MODAL ─────────────────────────────────────── -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitle">Editar usuario</span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nombre de usuario</label>
+        <input class="form-input" id="mUsername" type="text" placeholder="@usuario">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="mEmail" type="email" placeholder="email@example.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Rol</label>
+        <select class="form-input" id="mRol">
+          <option>Suscriptor</option>
+          <option>Colaborador</option>
+          <option>Redactor</option>
+          <option>Administrador</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Estado</label>
+        <select class="form-input" id="mEstado">
+          <option>Activo</option>
+          <option>Suspendido</option>
+        </select>
+      </div>
+      <!-- Last admin warning -->
+      <div class="alert-warn" id="lastAdminWarn" style="display:none">
+        ⚠️ No puedes degradar al único administrador del sistema.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-delete" id="btnDelete" onclick="deleteUser()">Eliminar cuenta</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn-modal-cancel" onclick="closeModal()">Cancelar</button>
+        <button class="btn-modal-save" onclick="saveUser()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOAST ──────────────────────────────────────── -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/base.js" defer></script>
+  <script src="js/dashboard-admin.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/modals.js" defer></script>
+</body>
+</html>

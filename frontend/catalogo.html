@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-page="catalogo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo — GameHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/catalogo.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23D97757'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='white'>GH</text></svg>">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">GH</div>
+      <div><div class="nav-logo-text">GameHub</div><small>gamehub.io</small></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav.inicio">Inicio</a>
+      <a href="catalogo.html" class="active" data-i18n="nav.catalogo">Catálogo</a>
+      <a href="noticias.html" data-i18n="nav.noticias">Noticias</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="multimedia.html" data-i18n="nav.multimedia">Multimedia</a>
+      <a href="agenda.html" data-i18n="nav.agenda">Agenda</a>
+      <a href="equipo.html" data-i18n="nav.equipo">Equipo</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle">☀️</button>
+      <span class="nav-lang" data-i18n="nav.lang">ES / EN</span>
+      <button class="btn-ghost" onclick="location.href='login.html'" data-i18n="nav.login">Iniciar sesión</button>
+      <button class="btn-primary" onclick="location.href='register.html'" data-i18n="nav.registro">Registro</button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="header-top">
+      <div>
+        <h1 class="page-title" data-i18n="catalogo.title">Catálogo de <em>videojuegos</em></h1>
+        <p class="page-subtitle" data-i18n="catalogo.subtitle">Los mejores juegos de la historia · valorados por prensa y comunidad</p>
+      </div>
+    </div>
+    <div class="controls-row">
+      <div class="search-wrap">
+        <span class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <input class="search-input" type="search" id="searchInput" placeholder="🔍 Buscar juego…" data-i18n-placeholder="catalogo.search.placeholder" autocomplete="off">
+      </div>
+      <select class="sort-select" id="sortSelect">
+        <option value="ranking" data-i18n="catalogo.sort.ranking">Ordenar por: ranking</option>
+        <option value="press" data-i18n="catalogo.sort.press">Nota prensa</option>
+        <option value="community" data-i18n="catalogo.sort.community">Nota comunidad</option>
+        <option value="year-desc" data-i18n="catalogo.sort.year_desc">Año (más reciente)</option>
+        <option value="year-asc" data-i18n="catalogo.sort.year_asc">Año (más antiguo)</option>
+        <option value="name" data-i18n="catalogo.sort.name">Nombre A–Z</option>
+      </select>
+      <div class="view-toggle">
+        <button class="view-btn active" id="btnGrid" data-i18n-title="catalogo.view.grid" title="Vista cuadrícula">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+        <button class="view-btn" id="btnList" data-i18n-title="catalogo.view.list" title="Vista lista">
+          <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Active filter chips -->
+    <div class="active-filters" id="activeFilters"></div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <span data-i18n="catalogo.filters.title">Filtros</span>
+        <span class="clear-all" id="clearAll" data-i18n="catalogo.filters.clear">Limpiar</span>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-group-label" data-i18n="catalogo.filter.genero">Género</span>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-group="genero" value="rpg"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>RPG<span class="filter-opt-count">24</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="genero" value="accion"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>Acción<span class="filter-opt-count">38</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="genero" value="estrategia"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>Estrategia<span class="filter-opt-count">17</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="genero" value="indie"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>Indie<span class="filter-opt-count">29</span></label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-group-label" data-i18n="catalogo.filter.plataforma">Plataforma</span>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-group="plataforma" value="pc"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>PC<span class="filter-opt-count">82</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="plataforma" value="ps5"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>PS5<span class="filter-opt-count">55</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="plataforma" value="xbox"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>Xbox<span class="filter-opt-count">48</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="plataforma" value="switch"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>Switch<span class="filter-opt-count">31</span></label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-group-label" data-i18n="catalogo.filter.anyo">Año</span>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-group="anyo" value="2024"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>2024<span class="filter-opt-count">14</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="anyo" value="2023"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>2023<span class="filter-opt-count">22</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="anyo" value="2022"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>2022<span class="filter-opt-count">19</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="anyo" value="old"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span><span data-i18n="catalogo.filter.old">+ Antiguos</span><span class="filter-opt-count">61</span></label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-group-label" data-i18n="catalogo.filter.nota">Nota</span>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-group="nota" value="9-10"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>9 – 10<span class="filter-opt-count">12</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="nota" value="8-9"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>8 – 9<span class="filter-opt-count">34</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="nota" value="7-8"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>7 – 8<span class="filter-opt-count">28</span></label>
+          <label class="filter-opt"><input type="checkbox" data-group="nota" value="6-7"><span class="filter-box"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></span>6 – 7<span class="filter-opt-count">42</span></label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <div class="results-bar">
+        <span class="results-count" id="resultsCount"><strong>9</strong> juegos encontrados</span>
+      </div>
+
+      <!-- GRID VIEW -->
+      <div class="games-grid" id="gamesGrid">
+        <!-- Cards injected by JS from data array -->
+      </div>
+
+      <!-- LIST VIEW (hidden by default) -->
+      <div class="games-list" id="gamesList" style="display:none">
+      </div>
+
+      <!-- No results -->
+      <div class="no-results" id="noResults">
+        <div class="no-results-icon">🎮</div>
+        <p data-i18n="catalogo.no_results">Ningún juego coincide con los filtros seleccionados.</p>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination">
+        <button class="page-btn" id="prevPage" disabled>←</button>
+        <button class="page-btn active" data-page="1">1</button>
+        <button class="page-btn" data-page="2">2</button>
+        <button class="page-btn" data-page="3">3</button>
+        <button class="page-btn" id="nextPage">→</button>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/i18n.js" defer></script>
+  <script src="js/base.js" defer></script>
+  <script src="js/catalogo.js" defer></script>
+  <script src="js/modals.js" defer></script>
+</body>
+</html>
