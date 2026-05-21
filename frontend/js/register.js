@@ -150,35 +150,38 @@ form.addEventListener('submit', async (e) => {
         return;
     }
 
-    /* ── Simulate server call ──────────────────────────
-       Replace this block with a real fetch() to your backend.
-       Expected response: { ok: true } or { ok: false, error: 'email_taken' }
-    ─────────────────────────────────────────────────── */
     btnSubmit.disabled = true;
-    btnSubmit.textContent = 'Creando cuenta...';
+    btnSubmit.textContent = t('register.creando');
 
-    await new Promise(r => setTimeout(r, 900)); // simulated delay
+    const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: inputs.username.value.trim().replace(/^@/, ''),
+            email: inputs.email.value.trim(),
+            password: inputs.password.value,
+        })
+    });
 
-    const simulatedEmailTaken = inputs.email.value.trim() === 'taken@example.com';
+    const data = await res.json();
 
-    if (simulatedEmailTaken) {
-        // Server says email already exists (RNF-03)
+    if (!res.ok) {
+        const emailTaken = data.error?.includes('email') || data.error?.includes('usuario');
         setFieldState(inputs.email, null, false);
-        hints.email.textContent = 'Este email ya está registrado.';
+        hints.email.textContent = emailTaken ? t('register.error.email_taken') : data.error;
         hints.email.classList.add('visible');
-        document.getElementById('alertErrorText').textContent = 'Este email ya está registrado. ¿Quieres iniciar sesión?';
+        document.getElementById('alertErrorText').textContent = data.error;
         alertError.classList.add('visible');
         shake();
         btnSubmit.disabled = false;
-        btnSubmit.textContent = 'Crear cuenta';
+        btnSubmit.textContent = t('register.submit');
         return;
     }
 
-    // SUCCESS — CU-01: rol Suscriptor asignado, email de confirmación enviado
     form.style.display = 'none';
     alertOk.classList.add('visible');
-    btnSubmit.disabled = false;
-
     setTimeout(() => {
         window.location.href = 'login.html';
     }, 2500);
