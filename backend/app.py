@@ -9,6 +9,9 @@ from mysql.connector import Error
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
+from flask_cors import CORS
+CORS(app, supports_credentials=True, origins=['http://localhost:5500'])
+
 # Configuración de entorno y llave secreta de sesión
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'super-secret-key-game-hub-2026')
 
