@@ -392,10 +392,10 @@ const MODALS = {
 ══════════════════════════════════════════════════════ */
 
 const TEAM = [
-  { initials: 'A1', name: 'Nombre Apellido 1', role: 'Project Manager & Backend',  email: 'miembro1@example.com', color: '#3a6eb0' },
-  { initials: 'A2', name: 'Nombre Apellido 2', role: 'Frontend & UX/UI',            email: 'miembro2@example.com', color: '#D97757' },
-  { initials: 'A3', name: 'Nombre Apellido 3', role: 'Backend & Base de Datos',     email: 'miembro3@example.com', color: '#5B8C5A' },
-  { initials: 'A4', name: 'Nombre Apellido 4', role: 'QA & Documentación',          email: 'miembro4@example.com', color: '#8A5BAD' },
+  { initials: 'A1', name: 'Adrian Tercero Delicado', role: 'Project Manager & Backend',  email: 'adrian.tercero@goumh.umh.es', color: '#3a6eb0' },
+  { initials: 'A2', name: 'Pablo Fernández Llorca', role: 'Frontend & UX/UI',            email: 'pablo.fernandez25@goumh.umh.es', color: '#D97757' },
+  { initials: 'A3', name: 'Alejandro Pomares García', role: 'Backend & Base de Datos',     email: 'alejandro.pomares05@goumh.umh.es', color: '#5B8C5A' },
+  { initials: 'A4', name: 'Pedro Martínez Torres', role: 'QA & Documentación',          email: 'pedro.martinez51@goumh.umh.es', color: '#8A5BAD' },
 ];
 
 const PROJECT_NAME   = 'GameHub & Services Ecosystem';
