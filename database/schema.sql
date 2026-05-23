@@ -1,86 +1,156 @@
--- Creación de la Base de Datos
+-- ═══════════════════════════════════════════════════════
+-- GameHub & Services Ecosystem — Schema v2
+-- ═══════════════════════════════════════════════════════
+
 CREATE DATABASE IF NOT EXISTS game_hub_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE game_hub_db;
 
--- 1. Tabla de Roles (RBAC) [cite: 47, 78]
+-- ── 1. Roles (RBAC) ──────────────────────────────────
 CREATE TABLE IF NOT EXISTS roles (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id        INT AUTO_INCREMENT PRIMARY KEY,
     role_name VARCHAR(50) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
 
--- 2. Tabla de Usuarios [cite: 69]
+-- ── 2. Usuarios ───────────────────────────────────────
 CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) NOT NULL UNIQUE, -- [cite: 71, 86]
-    email VARCHAR(150) NOT NULL UNIQUE,    -- [cite: 72, 86]
-    password_hash VARCHAR(255) NOT NULL,   -- [cite: 73, 88]
-    role_id INT NOT NULL DEFAULT 3,        -- [cite: 74, 87] (Por defecto: Suscriptor)
-    avatar_url VARCHAR(255) NULL,          -- [cite: 75]
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- [cite: 76]
-    status BOOLEAN DEFAULT TRUE,           -- [cite: 77] (True = Activo, False = Suspendido)
-    failed_attempts INT DEFAULT 0,         -- [cite: 93] (Mitigación fuerza bruta)
-    last_login TIMESTAMP NULL,             -- [cite: 93]
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    username        VARCHAR(100) NOT NULL UNIQUE,
+    email           VARCHAR(150) NOT NULL UNIQUE,
+    password_hash   VARCHAR(255) NOT NULL,
+    role_id         INT NOT NULL DEFAULT 3,          -- 3 = Suscriptor
+    avatar_url      VARCHAR(255) NULL,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status          BOOLEAN DEFAULT TRUE,             -- TRUE = Activo
+    failed_attempts INT DEFAULT 0,
+    last_login      TIMESTAMP NULL,
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- 3. Tabla de Videojuegos [cite: 97]
+-- ── 3. Videojuegos ────────────────────────────────────
 CREATE TABLE IF NOT EXISTS games (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(150) NOT NULL,          -- [cite: 99]
-    description TEXT NOT NULL,             -- [cite: 100]
-    genre VARCHAR(100) NOT NULL,           -- [cite: 101]
-    platform VARCHAR(100) NOT NULL,        -- [cite: 104]
-    cover_image VARCHAR(255) NULL,         -- [cite: 105]
-    press_rating DECIMAL(3,2) DEFAULT 0.0, -- [cite: 106]
-    community_rating DECIMAL(3,2) DEFAULT 0.0, -- [cite: 107]
-    release_year INT NOT NULL
+    id               INT AUTO_INCREMENT PRIMARY KEY,
+    title            VARCHAR(150) NOT NULL,
+    description      TEXT NOT NULL,
+    genre            VARCHAR(100) NOT NULL,
+    platform         VARCHAR(100) NOT NULL,
+    cover_image      VARCHAR(255) NULL,
+    trailer_url      VARCHAR(255) NULL,
+    press_score      DECIMAL(4,1) DEFAULT 0.0,
+    community_score  DECIMAL(4,1) DEFAULT 0.0,
+    year             INT NOT NULL
 ) ENGINE=InnoDB;
 
--- 4. Tabla de Noticias [cite: 110]
+-- ── 4. Noticias ───────────────────────────────────────
 CREATE TABLE IF NOT EXISTS news (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(200) NOT NULL,          -- [cite: 112]
-    content TEXT NOT NULL,                 -- [cite: 113]
-    main_image VARCHAR(255) NULL,          -- [cite: 114]
-    published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- [cite: 115]
-    category VARCHAR(50) NOT NULL,         -- [cite: 116] (Noticia, Análisis, Guía)
-    author_id INT NOT NULL,                -- [cite: 117]
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    title      VARCHAR(200) NOT NULL,
+    content    TEXT NOT NULL,
+    main_image VARCHAR(255) NULL,
+    category   VARCHAR(50) NOT NULL,
+    author_id  INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 5. Tabla de Comentarios [cite: 142] (Relación de composición lógica fuerte) [cite: 49]
+-- ── 5. Comentarios de noticias ────────────────────────
 CREATE TABLE IF NOT EXISTS comments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    content TEXT NOT NULL,                 -- [cite: 144]
-    user_id INT NOT NULL,                  -- [cite: 146]
-    news_id INT NOT NULL,                  -- [cite: 147]
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- [cite: 149]
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    texto      TEXT NOT NULL,
+    user_id    INT NOT NULL,
+    news_id    INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (news_id) REFERENCES news(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 6. Tabla de Eventos [cite: 128]
+-- ── 6. Posts del blog ─────────────────────────────────
+CREATE TABLE IF NOT EXISTS posts (
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    title        VARCHAR(200) NOT NULL,
+    content      TEXT NOT NULL,
+    excerpt      VARCHAR(500) NULL,
+    main_image   VARCHAR(255) NULL,
+    category     VARCHAR(50) NOT NULL,
+    status       ENUM('draft','published') DEFAULT 'draft',
+    reading_time VARCHAR(20) NULL,
+    author_id    INT NOT NULL,
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ── 7. Comentarios del blog ───────────────────────────
+CREATE TABLE IF NOT EXISTS post_comments (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    text       TEXT NOT NULL,
+    user_id    INT NOT NULL,
+    post_id    INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ── 8. Eventos ────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS events (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(150) NOT NULL,          -- [cite: 134]
-    start_date DATE NOT NULL,              -- [cite: 136]
-    end_date DATE NOT NULL,                -- [cite: 138]
-    location VARCHAR(150) NOT NULL,        -- [cite: 139]
-    official_url VARCHAR(255) NULL         -- [cite: 139]
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    name        VARCHAR(150) NOT NULL,
+    event_type  ENUM('lanzamiento','feria','convencion') NOT NULL,
+    event_date  DATE NOT NULL,
+    location    VARCHAR(150) NOT NULL,
+    description TEXT NULL,
+    official_url VARCHAR(255) NULL
 ) ENGINE=InnoDB;
 
--- 7. Tabla de Mensajes de Soporte [cite: 152]
+-- ── 9. Favoritos ──────────────────────────────────────
+CREATE TABLE IF NOT EXISTS favorites (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    user_id    INT NOT NULL,
+    game_id    INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_fav (user_id, game_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ── 10. Seguimientos entre usuarios ──────────────────
+CREATE TABLE IF NOT EXISTS follows (
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    follower_id INT NOT NULL,
+    followed_id INT NOT NULL,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_follow (follower_id, followed_id),
+    FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (followed_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ── 11. Eventos guardados ─────────────────────────────
+CREATE TABLE IF NOT EXISTS saved_events (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    user_id    INT NOT NULL,
+    event_id   INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_saved (user_id, event_id),
+    FOREIGN KEY (user_id)  REFERENCES users(id)   ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES events(id)  ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ── 12. Mensajes de soporte ───────────────────────────
 CREATE TABLE IF NOT EXISTS messages (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    sender_name VARCHAR(150) NOT NULL,     -- [cite: 154]
-    contact_email VARCHAR(150) NOT NULL,   -- [cite: 156]
-    subject VARCHAR(150) NOT NULL,          -- [cite: 157]
-    message TEXT NOT NULL,                 -- [cite: 158]
-    is_read BOOLEAN DEFAULT FALSE,         -- [cite: 159]
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    sender_name   VARCHAR(150) NOT NULL,
+    contact_email VARCHAR(150) NOT NULL,
+    subject       VARCHAR(150) NOT NULL,
+    message       TEXT NOT NULL,
+    is_read       BOOLEAN DEFAULT FALSE,
+    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- --- INDEXACIÓN PARA OPTIMIZACIÓN DE RENDIMIENTO (RNF-02)  ---
-CREATE INDEX idx_games_genre_platform ON games(genre, platform);
-CREATE INDEX idx_news_category_date ON news(category, published_at DESC);
-CREATE INDEX idx_comments_news ON comments(news_id);
+-- ── Índices de rendimiento ────────────────────────────
+CREATE INDEX idx_games_genre_platform  ON games(genre, platform);
+CREATE INDEX idx_games_score           ON games(community_score DESC);
+CREATE INDEX idx_news_category_date    ON news(category, created_at DESC);
+CREATE INDEX idx_comments_news         ON comments(news_id);
+CREATE INDEX idx_post_comments_post    ON post_comments(post_id);
+CREATE INDEX idx_posts_category_status ON posts(category, status);
+CREATE INDEX idx_events_date_type      ON events(event_date, event_type);
+CREATE INDEX idx_favorites_user        ON favorites(user_id);
+CREATE INDEX idx_follows_follower      ON follows(follower_id);
