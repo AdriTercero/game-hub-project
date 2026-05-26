@@ -29,8 +29,8 @@
       </div>
     </div>
     <div class="topbar-right">
-      <div class="role-badge editor"><span class="role-dot"></span>Redactor</div>
-      <span class="topbar-lang">ES / EN</span>
+      <div class="role-badge editor"><span class="role-dot"></span><span data-i18n="dash.role.redactor">Redactor</span></div>
+      <span class="topbar-lang" data-i18n="nav.lang">ES / EN</span>
       <button class="theme-toggle" id="themeToggle">☀️</button>
       <div class="user-avatar">RE</div>
     </div>
@@ -41,61 +41,61 @@
     <!-- SIDEBAR -->
     <nav class="sidebar">
       <div class="sidebar-section">
-        <span class="sidebar-section-label">Principal</span>
-        <div class="nav-item active" onclick="setActive(this)">
+        <span class="sidebar-section-label" data-i18n="dash.nav.principal">Principal</span>
+        <div class="nav-item active" data-panel="resumen" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          Resumen
+          <span data-i18n="dash.nav.resumen">Resumen</span>
         </div>
       </div>
 
       <div class="sidebar-divider"></div>
 
       <div class="sidebar-section">
-        <span class="sidebar-section-label">Contenido</span>
-        <div class="nav-item" onclick="setActive(this)">
+        <span class="sidebar-section-label" data-i18n="dash.nav.contenido">Contenido</span>
+        <div class="nav-item" data-panel="noticias" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>
-          Noticias
+          <span data-i18n="nav.noticias">Noticias</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="blog" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          Posts blog
+          <span data-i18n="nav.blog">Posts blog</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="revision" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Por revisar
+          <span data-i18n="dash.red.por_revisar">Por revisar</span>
           <span class="nav-badge urgent" id="badgeRevision">3</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="programadas" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Programadas
+          <span data-i18n="dash.red.programadas">Programadas</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="media" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          Biblioteca media
+          <span data-i18n="dash.red.media">Biblioteca media</span>
         </div>
       </div>
 
       <div class="sidebar-divider"></div>
 
       <div class="sidebar-section">
-        <span class="sidebar-section-label">Comunidad</span>
-        <div class="nav-item" onclick="setActive(this)">
+        <span class="sidebar-section-label" data-i18n="dash.red.comunidad">Comunidad</span>
+        <div class="nav-item" data-panel="comentarios" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Comentarios
+          <span data-i18n="dash.admin.comentarios">Comentarios</span>
         </div>
       </div>
 
       <div class="sidebar-divider"></div>
 
       <div class="sidebar-section">
-        <span class="sidebar-section-label">Cuenta</span>
-        <div class="nav-item" onclick="setActive(this)">
+        <span class="sidebar-section-label" data-i18n="dash.nav.cuenta">Cuenta</span>
+        <div class="nav-item" data-panel="ajustes" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-          Ajustes
+          <span data-i18n="dash.nav.ajustes">Ajustes</span>
         </div>
-        <div class="nav-item logout" onclick="location.href='index.html'">
+        <div class="nav-item logout" data-action="logout">
           <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          Cerrar sesión
+          <span data-i18n="dash.nav.logout">Cerrar sesión</span>
         </div>
       </div>
 
@@ -104,7 +104,7 @@
           <div class="sidebar-avatar editor">RE</div>
           <div style="min-width:0">
             <div class="sidebar-user-name">Redactor</div>
-            <div class="sidebar-user-role editor">● Redactor</div>
+            <div class="sidebar-user-role editor">● <span data-i18n="dash.role.redactor">Redactor</span></div>
           </div>
         </div>
       </div>
@@ -113,46 +113,43 @@
     <!-- MAIN -->
     <main class="main">
 
-      <!-- Page header -->
+    <!-- ── PANEL: RESUMEN ─────────────────────────────── -->
+    <div class="panel" id="panel-resumen">
       <div class="page-header">
         <div>
-          <h1 class="page-title">Panel de <em>redacción</em></h1>
-          <p class="page-sub">CU-03 · publicar y gestionar contenido editorial</p>
+          <h1 class="page-title" data-i18n="dash.red.panel_title">Panel de <em>redacción</em></h1>
         </div>
         <div class="page-actions">
-          <button class="btn-schedule" onclick="openModal(null,'schedule')">🗓 Programar</button>
-          <button class="btn-new" onclick="openModal(null,'new')">+ Nueva noticia</button>
+          <button class="btn-schedule" onclick="openModal(null,'schedule')" data-i18n="dash.red.schedule">🗓 Programar</button>
+          <button class="btn-new" onclick="openModal(null,'new')" data-i18n="dash.red.new_news">+ Nueva noticia</button>
         </div>
       </div>
 
-      <!-- KPIs -->
       <div class="kpi-grid">
         <div class="kpi-card">
           <div class="kpi-icon">📰</div>
-          <div class="kpi-label">Publicadas</div>
+          <div class="kpi-label" data-i18n="dash.red.kpi.publicadas">Publicadas</div>
           <div class="kpi-value-row">
             <div class="kpi-value" id="kpiPublicadas">48</div>
-            <span class="kpi-delta">+6 esta sem</span>
+            <span class="kpi-delta">+6 <span data-i18n="dash.colab.esta_semana">esta sem</span></span>
           </div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">📝</div>
-          <div class="kpi-label">Borradores</div>
-          <div class="kpi-value-row">
-            <div class="kpi-value" id="kpiBorradores">0</div>
-          </div>
+          <div class="kpi-label" data-i18n="dash.colab.borradores">Borradores</div>
+          <div class="kpi-value-row"><div class="kpi-value" id="kpiBorradores">0</div></div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">⏳</div>
-          <div class="kpi-label">Por revisar</div>
+          <div class="kpi-label" data-i18n="dash.red.por_revisar">Por revisar</div>
           <div class="kpi-value-row">
             <div class="kpi-value kpi-urgent" id="kpiRevision">0</div>
-            <span class="kpi-urgent-badge">urgente</span>
+            <span class="kpi-urgent-badge" data-i18n="dash.red.urgente">urgente</span>
           </div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">👁</div>
-          <div class="kpi-label">Lecturas mes</div>
+          <div class="kpi-label" data-i18n="dash.red.kpi.lecturas">Lecturas mes</div>
           <div class="kpi-value-row">
             <div class="kpi-value">124k</div>
             <span class="kpi-delta green">+12%</span>
@@ -160,50 +157,76 @@
         </div>
       </div>
 
-      <!-- Two columns -->
       <div class="two-col">
-
-        <!-- Publication queue -->
         <div class="widget">
           <div class="widget-header">
-            <span class="widget-title">Cola de publicación</span>
-            <span class="widget-action" onclick="openModal(null,'new')">+ Nueva →</span>
+            <span class="widget-title" data-i18n="dash.red.cola">Cola de publicación</span>
+            <span class="widget-action" onclick="openModal(null,'new')">+ <span data-i18n="dash.red.nueva">Nueva</span> →</span>
           </div>
           <div class="queue-list" id="queueList"></div>
         </div>
 
-        <!-- Collaborator review queue -->
         <div class="widget">
           <div class="widget-header">
-            <span class="widget-title">Por revisar <span class="review-subtitle">(colaboradores)</span></span>
+            <span class="widget-title" data-i18n="dash.red.por_revisar">Por revisar <span class="review-subtitle" data-i18n="dash.red.colaboradores">(colaboradores)</span></span>
             <span class="review-count" id="reviewCount"></span>
           </div>
           <div class="review-list" id="reviewList"></div>
           <div class="review-empty" id="reviewEmpty" style="display:none">
             <div style="font-size:28px;margin-bottom:8px">✅</div>
-            Todo revisado
+            <span data-i18n="dash.red.todo_revisado">Todo revisado</span>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ── PANELS: PLACEHOLDER ────────────────────────── -->
+    <div class="panel" id="panel-noticias" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="nav.noticias">Noticias</h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">📰</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-blog" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="nav.blog">Posts <em>blog</em></h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">✍️</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-revision" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="dash.red.por_revisar">Por <em>revisar</em></h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">⏳</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-programadas" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="dash.red.programadas">Programadas</h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">📅</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-media" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="dash.red.media">Biblioteca <em>media</em></h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">🖼️</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-comentarios" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="dash.admin.comentarios">Comentarios</h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">💬</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-ajustes" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="dash.nav.ajustes">Ajustes</h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">⚙️</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
 
     </main>
   </div>
 
-  <!-- ── MODAL nueva/editar noticia ─────────────────── -->
-  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
   <div class="modal" id="modal">
     <div class="modal-header">
-      <span class="modal-title" id="modalTitle">Nueva noticia</span>
+      <span class="modal-title" id="modalTitle" data-i18n="dash.red.modal.title">Nueva noticia</span>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label class="form-label">Titular</label>
-        <input class="form-input" id="mTitle" type="text" placeholder="Titular de la noticia">
+        <label class="form-label" data-i18n="dash.red.modal.headline">Titular</label>
+        <input class="form-input" id="mTitle" type="text" data-i18n-placeholder="dash.red.modal.headline_ph" placeholder="Titular de la noticia">
       </div>
       <div class="form-row-2">
         <div class="form-group">
-          <label class="form-label">Categoría</label>
+          <label class="form-label" data-i18n="dash.colab.th.categoria">Categoría</label>
           <select class="form-input" id="mCat">
             <option>Industria</option>
             <option>Tech</option>
@@ -212,7 +235,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Lectura estimada</label>
+          <label class="form-label" data-i18n="dash.red.modal.readtime">Lectura estimada</label>
           <select class="form-input" id="mRead">
             <option>2 min lectura</option>
             <option>4 min lectura</option>
@@ -222,21 +245,20 @@
         </div>
       </div>
       <div class="form-group" id="scheduleGroup" style="display:none">
-        <label class="form-label">Fecha y hora de publicación</label>
+        <label class="form-label" data-i18n="dash.red.modal.schedule_date">Fecha y hora de publicación</label>
         <input class="form-input" id="mSchedule" type="datetime-local">
       </div>
       <div class="form-group">
-        <label class="form-label">Resumen / cuerpo</label>
-        <textarea class="form-input form-textarea" id="mContent" placeholder="Escribe aquí el contenido…" rows="4"></textarea>
+        <label class="form-label" data-i18n="dash.red.modal.content">Resumen / cuerpo</label>
+        <textarea class="form-input form-textarea" id="mContent" data-i18n-placeholder="dash.red.modal.content_ph" placeholder="Escribe aquí el contenido…" rows="4"></textarea>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-modal-draft" onclick="saveArticle('Borrador')">Guardar borrador</button>
+      <button class="btn-modal-draft" onclick="saveArticle('Borrador')" data-i18n="dash.colab.modal.draft">Guardar borrador</button>
       <div style="display:flex;gap:8px">
-        <button class="btn-modal-cancel" onclick="closeModal()">Cancelar</button>
-        <button class="btn-modal-schedule" id="btnSchedule" onclick="saveArticle('Programada')" style="display:none">Programar</button>
-        <!-- CU-03: redactor SÍ puede publicar directamente -->
-        <button class="btn-modal-publish" id="btnPublish" onclick="saveArticle('Publicada')">Publicar ahora</button>
+        <button class="btn-modal-cancel" onclick="closeModal()" data-i18n="dash.admin.modal.cancel">Cancelar</button>
+        <button class="btn-modal-schedule" id="btnSchedule" onclick="saveArticle('Programada')" style="display:none" data-i18n="dash.red.schedule">Programar</button>
+        <button class="btn-modal-publish" id="btnPublish" onclick="saveArticle('Publicada')" data-i18n="dash.red.publish_now">Publicar ahora</button>
       </div>
     </div>
   </div>

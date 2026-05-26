@@ -42,20 +42,20 @@
     <nav class="sidebar">
       <div class="sidebar-section">
         <span class="sidebar-section-label" data-i18n="dash.nav.principal">Principal</span>
-        <div class="nav-item active" onclick="setActive(this)">
+        <div class="nav-item active" data-panel="resumen" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
           <span data-i18n="dash.nav.resumen">Resumen</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="perfil" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span data-i18n="dash.nav.perfil">Mi perfil</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="favoritos" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           <span data-i18n="dash.nav.favoritos">Favoritos</span>
           <span class="nav-badge">12</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="comentarios" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           <span data-i18n="dash.nav.comentarios">Mis comentarios</span>
         </div>
@@ -65,11 +65,11 @@
 
       <div class="sidebar-section">
         <span class="sidebar-section-label" data-i18n="dash.nav.comunidad">Comunidad</span>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="siguiendo" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <span data-i18n="dash.nav.siguiendo">Siguiendo</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="agenda" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           <span data-i18n="dash.nav.agenda">Mi agenda</span>
         </div>
@@ -79,7 +79,7 @@
 
       <div class="sidebar-section">
         <span class="sidebar-section-label" data-i18n="dash.nav.cuenta">Cuenta</span>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="ajustes" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
           <span data-i18n="dash.nav.ajustes">Ajustes</span>
         </div>
@@ -103,6 +103,9 @@
 
     <!-- MAIN -->
     <div class="main" id="mainContent">
+
+    <!-- ── PANEL: RESUMEN ─────────────────────────────── -->
+    <div class="panel" id="panel-resumen">
 
       <div class="welcome-banner">
         <h1 class="welcome-greeting">¡Bienvenida, <em>María</em>!</h1>
@@ -144,8 +147,6 @@
 
       <!-- Activity + Comments -->
       <div class="two-col">
-
-        <!-- Activity feed -->
         <div class="widget">
           <div class="widget-header">
             <span class="widget-title" data-i18n="dash.activity.title">Actividad reciente</span>
@@ -186,8 +187,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Last comments -->
         <div class="widget">
           <div class="widget-header">
             <span class="widget-title" data-i18n="dash.comments.title">Tus últimos comentarios</span>
@@ -208,7 +207,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- Favorites -->
@@ -219,18 +217,10 @@
             <span class="widget-action" data-i18n="section.ver_todo">Ver todos →</span>
           </div>
           <div class="favorites-grid">
-            <div class="fav-card">
-              <div class="fav-cover"><div class="fav-cover-bg fc1"></div><div class="fav-name">Juego 1</div></div>
-            </div>
-            <div class="fav-card">
-              <div class="fav-cover"><div class="fav-cover-bg fc2"></div><div class="fav-name">Juego 2</div></div>
-            </div>
-            <div class="fav-card">
-              <div class="fav-cover"><div class="fav-cover-bg fc3"></div><div class="fav-name">Juego 3</div></div>
-            </div>
-            <div class="fav-card">
-              <div class="fav-cover"><div class="fav-cover-bg fc4"></div><div class="fav-name">Juego 4</div></div>
-            </div>
+            <div class="fav-card"><div class="fav-cover"><div class="fav-cover-bg fc1"></div><div class="fav-name">Juego 1</div></div></div>
+            <div class="fav-card"><div class="fav-cover"><div class="fav-cover-bg fc2"></div><div class="fav-name">Juego 2</div></div></div>
+            <div class="fav-card"><div class="fav-cover"><div class="fav-cover-bg fc3"></div><div class="fav-name">Juego 3</div></div></div>
+            <div class="fav-card"><div class="fav-cover"><div class="fav-cover-bg fc4"></div><div class="fav-name">Juego 4</div></div></div>
           </div>
         </div>
       </div>
@@ -243,33 +233,40 @@
             <span class="widget-action" data-i18n="dash.reco.link">Ver catálogo →</span>
           </div>
           <div class="reco-grid">
-            <div class="reco-card">
-              <div class="reco-cover"><div class="reco-cover-bg rc1"></div></div>
-              <div class="reco-body">
-                <div class="reco-name">Recomendación 1</div>
-                <div class="reco-score">★ 9.2 comunidad</div>
-              </div>
-            </div>
-            <div class="reco-card">
-              <div class="reco-cover"><div class="reco-cover-bg rc2"></div></div>
-              <div class="reco-body">
-                <div class="reco-name">Recomendación 2</div>
-                <div class="reco-score">★ 9.3 comunidad</div>
-              </div>
-            </div>
-            <div class="reco-card">
-              <div class="reco-cover"><div class="reco-cover-bg rc3"></div></div>
-              <div class="reco-body">
-                <div class="reco-name">Recomendación 3</div>
-                <div class="reco-score">★ 9.4 comunidad</div>
-              </div>
-            </div>
+            <div class="reco-card"><div class="reco-cover"><div class="reco-cover-bg rc1"></div></div><div class="reco-body"><div class="reco-name">Recomendación 1</div><div class="reco-score">★ 9.2 comunidad</div></div></div>
+            <div class="reco-card"><div class="reco-cover"><div class="reco-cover-bg rc2"></div></div><div class="reco-body"><div class="reco-name">Recomendación 2</div><div class="reco-score">★ 9.3 comunidad</div></div></div>
+            <div class="reco-card"><div class="reco-cover"><div class="reco-cover-bg rc3"></div></div><div class="reco-body"><div class="reco-name">Recomendación 3</div><div class="reco-score">★ 9.4 comunidad</div></div></div>
           </div>
         </div>
       </div>
 
+    </div><!-- end panel-resumen -->
 
-
+    <!-- ── PANELS: PLACEHOLDER ────────────────────────── -->
+    <div class="panel" id="panel-perfil" style="display:none">
+      <div class="welcome-banner"><h1 class="welcome-greeting" data-i18n="dash.nav.perfil">Mi <em>perfil</em></h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">👤</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-favoritos" style="display:none">
+      <div class="welcome-banner"><h1 class="welcome-greeting" data-i18n="dash.nav.favoritos">Mis <em>favoritos</em></h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">❤️</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-comentarios" style="display:none">
+      <div class="welcome-banner"><h1 class="welcome-greeting" data-i18n="dash.nav.comentarios">Mis <em>comentarios</em></h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">💬</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-siguiendo" style="display:none">
+      <div class="welcome-banner"><h1 class="welcome-greeting" data-i18n="dash.nav.siguiendo">Siguiendo</h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">👥</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-agenda" style="display:none">
+      <div class="welcome-banner"><h1 class="welcome-greeting" data-i18n="dash.nav.agenda">Mi <em>agenda</em></h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">📅</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-ajustes" style="display:none">
+      <div class="welcome-banner"><h1 class="welcome-greeting" data-i18n="dash.nav.ajustes">Ajustes</h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">⚙️</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
     </div>
   </div>
 

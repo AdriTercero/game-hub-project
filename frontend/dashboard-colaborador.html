@@ -29,8 +29,8 @@
       </div>
     </div>
     <div class="topbar-right">
-      <div class="role-badge colab"><span class="role-dot"></span>Colaborador</div>
-      <span class="topbar-lang">ES / EN</span>
+      <div class="role-badge colab"><span class="role-dot"></span><span data-i18n="dash.role.colaborador">Colaborador</span></div>
+      <span class="topbar-lang" data-i18n="nav.lang">ES / EN</span>
       <button class="theme-toggle" id="themeToggle">☀️</button>
       <div class="user-avatar" title="Carlos">CA</div>
     </div>
@@ -42,48 +42,48 @@
     <nav class="sidebar">
 
       <div class="sidebar-section">
-        <span class="sidebar-section-label">Principal</span>
-        <div class="nav-item active" onclick="setActive(this)">
+        <span class="sidebar-section-label" data-i18n="dash.nav.principal">Principal</span>
+        <div class="nav-item active" data-panel="resumen" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          Resumen
+          <span data-i18n="dash.nav.resumen">Resumen</span>
         </div>
       </div>
 
       <div class="sidebar-divider"></div>
 
       <div class="sidebar-section">
-        <span class="sidebar-section-label">Mis artículos</span>
-        <div class="nav-item" onclick="setActive(this); filterByStatus('Borrador')">
+        <span class="sidebar-section-label" data-i18n="dash.colab.mis_articulos">Mis artículos</span>
+        <div class="nav-item" data-panel="articulos" data-filter="Borrador" onclick="setActive(this); filterByStatus('Borrador')">
           <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          Mis borradores
+          <span data-i18n="dash.colab.borradores">Mis borradores</span>
           <span class="nav-badge" id="badgeBorrador">0</span>
         </div>
-        <div class="nav-item" onclick="setActive(this); filterByStatus('En revisión')">
+        <div class="nav-item" data-panel="articulos" data-filter="En revisión" onclick="setActive(this); filterByStatus('En revisión')">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Pendientes
+          <span data-i18n="dash.colab.pendientes">Pendientes</span>
           <span class="nav-badge pending" id="badgePending">0</span>
         </div>
-        <div class="nav-item" onclick="setActive(this); filterByStatus('Publicado')">
+        <div class="nav-item" data-panel="articulos" data-filter="Publicado" onclick="setActive(this); filterByStatus('Publicado')">
           <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Publicados
+          <span data-i18n="dash.colab.publicados">Publicados</span>
         </div>
       </div>
 
       <div class="sidebar-divider"></div>
 
       <div class="sidebar-section">
-        <span class="sidebar-section-label">Cuenta</span>
-        <div class="nav-item" onclick="setActive(this)">
+        <span class="sidebar-section-label" data-i18n="dash.nav.cuenta">Cuenta</span>
+        <div class="nav-item" data-panel="perfil" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Mi perfil
+          <span data-i18n="dash.nav.perfil">Mi perfil</span>
         </div>
-        <div class="nav-item" onclick="setActive(this)">
+        <div class="nav-item" data-panel="ajustes" onclick="setActive(this)">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-          Ajustes
+          <span data-i18n="dash.nav.ajustes">Ajustes</span>
         </div>
-        <div class="nav-item logout" onclick="location.href='index.html'">
+        <div class="nav-item logout" data-action="logout">
           <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          Cerrar sesión
+          <span data-i18n="dash.nav.logout">Cerrar sesión</span>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
           <div class="sidebar-avatar colab">CA</div>
           <div style="min-width:0">
             <div class="sidebar-user-name">Carlos</div>
-            <div class="sidebar-user-role colab">● Colaborador</div>
+            <div class="sidebar-user-role colab">● <span data-i18n="dash.role.colaborador">Colaborador</span></div>
           </div>
         </div>
       </div>
@@ -101,98 +101,131 @@
     <!-- MAIN -->
     <main class="main">
 
-      <!-- Welcome -->
+    <!-- ── PANEL: RESUMEN ─────────────────────────────── -->
+    <div class="panel" id="panel-resumen" style="display:none">
       <div class="page-header">
         <div>
           <h1 class="page-title">Hola, <em>Carlos</em></h1>
-          <p class="page-sub">Colaborador externo · puede proponer artículos para revisión</p>
         </div>
-        <button class="btn-new" onclick="openModal()">+ Nuevo artículo</button>
+        <button class="btn-new" onclick="openModal()" data-i18n="dash.colab.new_article">+ Nuevo artículo</button>
       </div>
-
-      <!-- KPI tabs -->
       <div class="kpi-tabs-wrap">
         <div class="kpi-tabs">
           <button class="kpi-tab active" onclick="setKpiTab(this,'Borrador')">
-            Borradores
+            <span data-i18n="dash.colab.borradores">Borradores</span>
+            <span class="kpi-tab-val" id="kpiBorradorResumen">0</span>
+          </button>
+          <button class="kpi-tab" onclick="setKpiTab(this,'En revisión')">
+            <span data-i18n="dash.colab.en_revision">En revisión</span>
+            <span class="kpi-tab-val" id="kpiRevisionResumen">0</span>
+          </button>
+          <button class="kpi-tab" onclick="setKpiTab(this,'Publicado')">
+            <span data-i18n="dash.colab.publicados">Publicados</span>
+            <span class="kpi-tab-val highlight" id="kpiPublicadoResumen">0</span>
+          </button>
+        </div>
+        <span class="kpi-delta-badge" id="kpiDeltaResumen">+1 <span data-i18n="dash.colab.esta_semana">esta semana</span></span>
+      </div>
+    </div>
+
+    <!-- ── PANEL: ARTÍCULOS ───────────────────────────── -->
+    <div class="panel" id="panel-articulos">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title" data-i18n="dash.colab.mis_articulos">Mis <em>artículos</em></h1>
+        </div>
+        <button class="btn-new" onclick="openModal()" data-i18n="dash.colab.new_article">+ Nuevo artículo</button>
+      </div>
+
+      <div class="kpi-tabs-wrap">
+        <div class="kpi-tabs">
+          <button class="kpi-tab active" onclick="setKpiTab(this,'Borrador')">
+            <span data-i18n="dash.colab.borradores">Borradores</span>
             <span class="kpi-tab-val" id="kpiBorrador">0</span>
           </button>
           <button class="kpi-tab" onclick="setKpiTab(this,'En revisión')">
-            En revisión
+            <span data-i18n="dash.colab.en_revision">En revisión</span>
             <span class="kpi-tab-val" id="kpiRevision">0</span>
           </button>
           <button class="kpi-tab" onclick="setKpiTab(this,'Publicado')">
-            Publicados
+            <span data-i18n="dash.colab.publicados">Publicados</span>
             <span class="kpi-tab-val highlight" id="kpiPublicado">0</span>
           </button>
         </div>
-        <span class="kpi-delta-badge" id="kpiDelta">+1 esta semana</span>
+        <span class="kpi-delta-badge" id="kpiDelta">+1 <span data-i18n="dash.colab.esta_semana">esta semana</span></span>
       </div>
 
-      <!-- Table controls -->
       <div class="table-controls">
         <div class="table-search-wrap">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="search" id="tableSearch" placeholder="Buscar artículo…" autocomplete="off">
+          <input type="search" id="tableSearch" data-i18n-placeholder="dash.colab.search" placeholder="Buscar artículo…" autocomplete="off">
         </div>
         <select class="table-filter" id="filterCat">
-          <option value="">Categoría: todas</option>
+          <option value="" data-i18n="dash.colab.filter.all_cat">Categoría: todas</option>
           <option>Industria</option>
           <option>Tech</option>
           <option>Reseñas</option>
           <option>eSports</option>
         </select>
         <select class="table-filter" id="filterStatus">
-          <option value="">Estado: todos</option>
-          <option>Borrador</option>
-          <option>En revisión</option>
-          <option>Publicado</option>
-          <option>Rechazado</option>
+          <option value="" data-i18n="dash.colab.filter.all_status">Estado: todos</option>
+          <option data-i18n="dash.colab.status.borrador">Borrador</option>
+          <option data-i18n="dash.colab.status.revision">En revisión</option>
+          <option data-i18n="dash.colab.status.publicado">Publicado</option>
+          <option data-i18n="dash.colab.status.rechazado">Rechazado</option>
         </select>
       </div>
 
-      <!-- Articles table -->
       <div class="table-wrap">
         <table class="article-table">
           <thead>
             <tr>
-              <th>Título</th>
-              <th>Estado</th>
-              <th>Categoría</th>
-              <th>Última edición</th>
-              <th>Acciones</th>
+              <th data-i18n="dash.colab.th.titulo">Título</th>
+              <th data-i18n="dash.colab.th.estado">Estado</th>
+              <th data-i18n="dash.colab.th.categoria">Categoría</th>
+              <th data-i18n="dash.colab.th.edicion">Última edición</th>
+              <th data-i18n="dash.admin.th.acciones">Acciones</th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
         </table>
         <div class="table-empty" id="tableEmpty" style="display:none">
           <div style="font-size:32px;margin-bottom:10px">📝</div>
-          <div>No hay artículos que coincidan con los filtros</div>
+          <div data-i18n="dash.colab.no_results">No hay artículos que coincidan con los filtros</div>
         </div>
       </div>
 
-      <!-- Info notice -->
-      <div class="info-notice">
+      <div class="info-notice" data-i18n="dash.colab.notice">
         💡 Como colaborador, tus artículos se envían a revisión. Un redactor o administrador los publicará si los aprueba.
       </div>
+    </div>
+
+    <!-- ── PANELS: PLACEHOLDER ────────────────────────── -->
+    <div class="panel" id="panel-perfil" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="dash.nav.perfil">Mi <em>perfil</em></h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">👤</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
+    <div class="panel" id="panel-ajustes" style="display:none">
+      <div class="page-header"><h1 class="page-title" data-i18n="dash.nav.ajustes">Ajustes</h1></div>
+      <div class="panel-placeholder"><div class="placeholder-icon">⚙️</div><p data-i18n="dash.coming_soon">Sección en desarrollo</p></div>
+    </div>
 
     </main>
   </div>
 
-  <!-- ── MODAL nuevo/editar artículo ─────────────────── -->
-  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
   <div class="modal" id="modal">
     <div class="modal-header">
-      <span class="modal-title" id="modalTitle">Nuevo artículo</span>
+      <span class="modal-title" id="modalTitle" data-i18n="dash.colab.modal.title">Nuevo artículo</span>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label class="form-label">Título</label>
-        <input class="form-input" id="mTitle" type="text" placeholder="Título del artículo">
+        <label class="form-label" data-i18n="dash.colab.th.titulo">Título</label>
+        <input class="form-input" id="mTitle" type="text" data-i18n-placeholder="dash.colab.modal.title_ph" placeholder="Título del artículo">
       </div>
       <div class="form-group">
-        <label class="form-label">Categoría</label>
+        <label class="form-label" data-i18n="dash.colab.th.categoria">Categoría</label>
         <select class="form-input" id="mCat">
           <option>Industria</option>
           <option>Tech</option>
@@ -201,19 +234,18 @@
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">Contenido (resumen)</label>
-        <textarea class="form-input form-textarea" id="mContent" placeholder="Escribe aquí el resumen o cuerpo del artículo…" rows="4"></textarea>
+        <label class="form-label" data-i18n="dash.colab.modal.content_label">Contenido (resumen)</label>
+        <textarea class="form-input form-textarea" id="mContent" data-i18n-placeholder="dash.colab.modal.content_ph" placeholder="Escribe aquí el resumen o cuerpo del artículo…" rows="4"></textarea>
       </div>
-      <!-- Collaborator restriction notice -->
-      <div class="modal-notice">
+      <div class="modal-notice" data-i18n="dash.colab.modal.notice">
         📤 Al enviar, el artículo pasará a <strong>En revisión</strong>. No puedes publicarlo directamente.
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-modal-draft" onclick="saveArticle('Borrador')">Guardar borrador</button>
+      <button class="btn-modal-draft" onclick="saveArticle('Borrador')" data-i18n="dash.colab.modal.draft">Guardar borrador</button>
       <div style="display:flex;gap:8px">
-        <button class="btn-modal-cancel" onclick="closeModal()">Cancelar</button>
-        <button class="btn-modal-send" onclick="saveArticle('En revisión')">Enviar a revisión</button>
+        <button class="btn-modal-cancel" onclick="closeModal()" data-i18n="dash.admin.modal.cancel">Cancelar</button>
+        <button class="btn-modal-send" onclick="saveArticle('En revisión')" data-i18n="dash.colab.modal.send">Enviar a revisión</button>
       </div>
     </div>
   </div>
@@ -221,9 +253,9 @@
   <!-- ── TOAST ──────────────────────────────────────── -->
   <div class="toast" id="toast"></div>
 
+  <script src="js/i18n.js" defer></script>
   <script src="js/base.js" defer></script>
   <script src="js/dashboard-colaborador.js" defer></script>
-  <script src="js/i18n.js" defer></script>
   <script src="js/modals.js" defer></script>
 </body>
 </html>
