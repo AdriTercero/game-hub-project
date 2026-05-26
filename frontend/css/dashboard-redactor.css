@@ -1,3 +1,19 @@
+/* ── QUEUE BUTTON ALIASES ─────────────────────────── */
+.queue-btn,
+.btn-q {
+  font-size: 11.5px; padding: 4px 10px; border-radius: 6px;
+  cursor: pointer; background: transparent; transition: all .15s;
+  border: 1px solid var(--border-2, rgba(255,255,255,0.13));
+  color: var(--text-2); margin-right: 4px;
+}
+.queue-btn:hover, .btn-q:hover { color: var(--text); border-color: var(--accent); }
+.btn-q.publish {
+  color: var(--green, #5BAD5A); border-color: rgba(91,173,90,0.3);
+}
+.btn-q.publish:hover { background: rgba(91,173,90,0.08); }
+.btn-q.del { color: var(--muted); }
+.btn-q.del:hover { color: #ff6b6b; border-color: #ff6b6b; }
+
 /* ── REDACTOR ROLE COLORS ─────────────────────────── */
 .role-badge.editor {
   color: #7AABDD;

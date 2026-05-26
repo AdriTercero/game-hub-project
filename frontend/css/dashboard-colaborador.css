@@ -42,7 +42,35 @@
   padding: 4px 12px; border-radius: 100px; white-space: nowrap;
 }
 
-/* ── ARTICLE TABLE ────────────────────────────────── */
+/* ── ARTICLE TABLE BUTTON ALIASES ─────────────────── */
+.art-btn,
+.btn-edit,
+.btn-send,
+.btn-delete {
+  font-size: 12px; padding: 5px 12px; border-radius: 6px;
+  cursor: pointer; border: 1px solid var(--border-2, rgba(255,255,255,0.13));
+  background: transparent; transition: all .15s;
+  margin-right: 4px;
+}
+.art-btn, .btn-edit {
+  color: var(--text-2);
+}
+.art-btn:hover, .btn-edit:hover {
+  color: var(--text); border-color: var(--accent);
+}
+.btn-send {
+  color: var(--accent2, #7AABDD);
+  border-color: rgba(122,171,221,0.3);
+}
+.btn-send:hover { background: rgba(122,171,221,0.08); }
+.btn-delete,
+.art-btn.danger {
+  color: var(--muted);
+}
+.btn-delete:hover,
+.art-btn.danger:hover {
+  color: #ff6b6b; border-color: #ff6b6b;
+}
 .article-table { width: 100%; border-collapse: collapse; }
 .article-table thead { background: var(--surface-2, #20202C); border-bottom: 1px solid var(--border); }
 .article-table th {

@@ -1,3 +1,13 @@
+/* ── PANEL PLACEHOLDER ────────────────────────────── */
+.panel-placeholder {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 80px 20px;
+  color: var(--muted); font-size: 14px; text-align: center;
+  background: var(--surface); border: 1px dashed var(--border);
+  border-radius: 12px; margin-top: 8px;
+}
+.placeholder-icon { font-size: 40px; margin-bottom: 12px; }
+
 /* ── ADMIN ROLE COLORS ────────────────────────────── */
 .role-badge.admin {
   color: #D97757;
@@ -63,16 +73,33 @@
 .badge-status.suspendido::before { background: var(--muted); }
 
 .action-btns { display: flex; gap: 6px; }
-.btn-action {
-  font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 6px;
+.btn-action,
+.btn-edit,
+.btn-suspend,
+.btn-restore {
+  font-size: 12px; font-weight: 500;
+  padding: 5px 12px; border-radius: 6px;
   cursor: pointer; transition: all .15s; border: 1px solid transparent;
+  background: transparent;
 }
-.btn-action.edit    { color: var(--text-2); border-color: var(--border-2, rgba(255,255,255,0.13)); }
-.btn-action.edit:hover    { color: var(--text); border-color: var(--accent); }
-.btn-action.suspend { color: var(--muted); border-color: var(--border-2, rgba(255,255,255,0.13)); }
-.btn-action.suspend:hover { color: #ff6b6b; border-color: #ff6b6b; }
-.btn-action.activate { color: var(--green, #5BAD5A); border-color: rgba(91,173,90,0.3); }
-.btn-action.activate:hover { background: rgba(91,173,90,0.08); }
+.btn-action.edit, .btn-edit {
+  color: var(--text-2); border-color: var(--border-2, rgba(255,255,255,0.13));
+}
+.btn-action.edit:hover, .btn-edit:hover {
+  color: var(--text); border-color: var(--accent);
+}
+.btn-action.suspend, .btn-suspend {
+  color: var(--muted); border-color: var(--border-2, rgba(255,255,255,0.13));
+}
+.btn-action.suspend:hover, .btn-suspend:hover {
+  color: #ff6b6b; border-color: #ff6b6b;
+}
+.btn-action.restore, .btn-restore {
+  color: var(--green, #5BAD5A); border-color: rgba(91,173,90,0.3);
+}
+.btn-action.restore:hover, .btn-restore:hover {
+  background: rgba(91,173,90,0.08);
+}
 
 .table-empty { text-align: center; padding: 48px; color: var(--muted); font-size: 14px; }
 
