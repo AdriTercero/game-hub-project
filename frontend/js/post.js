@@ -13,7 +13,19 @@ async function checkAuth() {
 
 /* ── Init ──────────────────────────────────────────── */
 const formWrap = document.getElementById('commentFormWrap');
-const postId   = new URLSearchParams(location.search).get('id');
+const postId = new URLSearchParams(location.search).get('id');
+
+async function loadPost() {
+  const res  = await fetch(`/api/posts/${postId}`);
+  const post = await res.json();
+  document.querySelector('.post-title').textContent        = post.title;
+  document.querySelector('.post-body').innerHTML           = post.content;
+  document.querySelector('.post-author-name').textContent  = post.author;
+  // etc.
+  // Renderizar comentarios
+  post.comments.forEach(c => appendComment(c));
+}
+if (postId) loadPost();
 
 checkAuth().then(user => {
   if (user) {

@@ -1,21 +1,13 @@
-/* ── Theme ─────────────────────────────────────────── */
-const html   = document.documentElement;
-const thBtn  = document.getElementById('themeToggle');
-const saved  = localStorage.getItem('gh-theme') || 'dark';
-html.setAttribute('data-theme', saved);
-thBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
-thBtn.addEventListener('click', () => {
-  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  thBtn.textContent = next === 'dark' ? '☀️' : '🌙';
-  localStorage.setItem('gh-theme', next);
-});
-
-/* ── Sidebar active ────────────────────────────────── */
-function setActive(el) {
+/* ── Sidebar active + panel switching ──────────────── */
+window.setActive = function(el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
-}
+  const panelId = el.dataset.panel;
+  if (!panelId) return;
+  document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+  const target = document.getElementById('panel-' + panelId);
+  if (target) target.style.display = 'block';
+};
 
 /* ── Article data ──────────────────────────────────── */
 let ARTICLES = [
@@ -43,7 +35,7 @@ function updateKPIs() {
 }
 
 /* ── KPI tab click ─────────────────────────────────── */
-function setKpiTab(el, status) {
+window.setKpiTab = function(el, status) {
   document.querySelectorAll('.kpi-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   activeStatus = status;
@@ -52,7 +44,7 @@ function setKpiTab(el, status) {
 }
 
 /* ── Sidebar filter shortcut ───────────────────────── */
-function filterByStatus(status) {
+window.filterByStatus = function(status) {
   activeStatus = status;
   document.getElementById('filterStatus').value = status;
   renderTable();
@@ -113,7 +105,7 @@ function renderTable() {
 }
 
 /* ── Send to review — collaborator restriction ──────── */
-function sendToReview(id) {
+window.sendToReview = function(id) {
   const a = ARTICLES.find(a => a.id === id);
   if (!a) return;
   /* Collaborator cannot publish directly — always goes to review */
@@ -125,7 +117,7 @@ function sendToReview(id) {
 }
 
 /* ── Delete ────────────────────────────────────────── */
-function deleteArticle(id) {
+window.deleteArticle = function(id) {
   const a = ARTICLES.find(a => a.id === id);
   if (!a) return;
   ARTICLES = ARTICLES.filter(a => a.id !== id);
@@ -135,7 +127,7 @@ function deleteArticle(id) {
 }
 
 /* ── Modal ─────────────────────────────────────────── */
-function openModal(id) {
+window.openModal = function(id) {
   const overlay = document.getElementById('modalOverlay');
   const modal   = document.getElementById('modal');
   overlay.classList.add('open');
@@ -158,13 +150,13 @@ function openModal(id) {
   }
 }
 
-function closeModal() {
+window.closeModal = function() {
   document.getElementById('modal').classList.remove('open');
   document.getElementById('modalOverlay').classList.remove('open');
 }
 
 /* ── Save article ──────────────────────────────────── */
-function saveArticle(status) {
+window.saveArticle = function(status) {
   const title = document.getElementById('mTitle').value.trim();
   const cat   = document.getElementById('mCat').value;
 

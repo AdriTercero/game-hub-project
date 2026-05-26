@@ -1,21 +1,15 @@
-/* ── Theme ─────────────────────────────────────────── */
-const html  = document.documentElement;
-const thBtn = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('gh-theme') || 'dark';
-html.setAttribute('data-theme', savedTheme);
-thBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-thBtn.addEventListener('click', () => {
-  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  thBtn.textContent = next === 'dark' ? '☀️' : '🌙';
-  localStorage.setItem('gh-theme', next);
-});
-
-/* ── Sidebar active ────────────────────────────────── */
-function setActive(el) {
+/* ── Sidebar active + panel switching ──────────────── */
+window.setActive = function(el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
-}
+
+  const panelId = el.dataset.panel;
+  if (!panelId) return;
+
+  document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+  const target = document.getElementById('panel-' + panelId);
+  if (target) target.style.display = 'block';
+};
 
 /* ── User data ─────────────────────────────────────── */
 let USERS = [
@@ -127,7 +121,7 @@ function renderPagination(pages) {
   pag.innerHTML = html;
 }
 
-function goPage(p) {
+window.goPage = function(p) {
   const pages = Math.ceil(getFiltered().length / PER_PAGE);
   if (p < 1 || p > pages) return;
   currentPage = p;
@@ -144,7 +138,7 @@ document.getElementById('filterRol').addEventListener('change', () => { currentP
 document.getElementById('filterEstado').addEventListener('change', () => { currentPage = 1; renderTable(); });
 
 /* ── Toggle suspend ────────────────────────────────── */
-function toggleSuspend(id) {
+window.toggleSuspend = function(id) {
   const u = USERS.find(u => u.id === id);
   if (!u) return;
 
@@ -160,7 +154,7 @@ function toggleSuspend(id) {
 }
 
 /* ── Modal ─────────────────────────────────────────── */
-function openModal(mode, id) {
+window.openModal = function(mode, id) {
   const overlay = document.getElementById('modalOverlay');
   const modal   = document.getElementById('modal');
   const warn    = document.getElementById('lastAdminWarn');
@@ -196,14 +190,14 @@ function openModal(mode, id) {
   }
 }
 
-function closeModal() {
+window.closeModal = function() {
   const modal   = document.getElementById('modal');
   const overlay = document.getElementById('modalOverlay');
   modal.classList.remove('open');
   overlay.classList.remove('open');
 }
 
-function saveUser() {
+window.saveUser = function() {
   const handle = document.getElementById('mUsername').value.trim();
   const email  = document.getElementById('mEmail').value.trim();
   const rol    = document.getElementById('mRol').value;
@@ -240,7 +234,7 @@ function saveUser() {
   closeModal();
 }
 
-function deleteUser() {
+window.deleteUser = function() {
   const u = USERS.find(u => u.id === editingId);
   if (!u) return;
 
@@ -257,7 +251,7 @@ function deleteUser() {
 }
 
 /* ── Export CSV (simulated) ────────────────────────── */
-function exportCSV() {
+window.exportCSV = function() {
   const rows = ['Usuario,Email,Rol,Estado,Registrado',
     ...getFiltered().map(u => `${u.handle},${u.email},${u.rol},${u.estado},${u.registered}`)
   ].join('\n');

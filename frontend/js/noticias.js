@@ -1,45 +1,80 @@
     /* ── Category filter ───────────────────────────────── */
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards      = document.querySelectorAll('.news-card[data-cat]');
-    const noResults  = document.getElementById('noResults');
-    const countEl    = document.getElementById('resultCount');
+    const noResults = document.getElementById('noResults');
+    const countEl = document.getElementById('resultCount');
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    let currentCat = 'todas';
+    let currentPage = 1;
 
-        const cat = btn.dataset.cat;
-        let visible = 0;
+    /* Get news */
+    async function fetchNews(cat, page = 1) {
+        const params = new URLSearchParams({
+            page
+        });
+        if (cat && cat !== 'todas') params.set('category', cat);
+        const res = await fetch('/api/news?' + params);
+        const data = await res.json();
+        return data; // { news: [], total: int, page: int }
+    }
 
-        cards.forEach((card, i) => {
-          const match = cat === 'todas' || card.dataset.cat === cat;
-          card.classList.toggle('visible', match);
-          if (match) {
-            card.style.animationDelay = (visible * 0.06) + 's';
-            // re-trigger animation
-            card.classList.remove('reveal');
-            void card.offsetWidth;
-            card.classList.add('reveal');
-            visible++;
-          }
+    function renderCards(newsList) {
+        const grid = document.getElementById('newsGrid');
+        // Elimina las cards existentes pero mantén el #noResults
+        grid.querySelectorAll('.news-card').forEach(c => c.remove());
+
+        newsList.forEach((news, i) => {
+            const card = document.createElement('article');
+            card.className = 'news-card visible reveal';
+            card.style.animationDelay = (i * 0.06) + 's';
+            card.dataset.cat = news.category;
+            card.onclick = () => location.href = `noticia.html?id=${news.id}`;
+            card.innerHTML = `
+      <div class="news-img"><div class="news-img-bg ni1"></div></div>
+      <div class="news-body">
+        <div class="news-meta">
+          <span class="news-cat">${news.category}</span>
+          <span class="news-time">${new Date(news.created_at).toLocaleDateString()}</span>
+        </div>
+        <div class="news-title">${news.title}</div>
+        <div class="news-footer">
+          <span class="news-author">por ${news.author}</span>
+        </div>
+      </div>`;
+            grid.insertBefore(card, document.getElementById('noResults'));
         });
 
-        noResults.classList.toggle('visible', visible === 0);
-        countEl.textContent = visible === 0
-          ? 'Sin resultados'
-          : `${visible} artículo${visible !== 1 ? 's' : ''}`;
-      });
+        noResults.classList.toggle('visible', newsList.length === 0);
+        countEl.textContent = `${newsList.length} artículo${newsList.length !== 1 ? 's' : ''}`;
+    }
+
+    async function loadNews(cat, page = 1) {
+        const data = await fetchNews(cat, page);
+        renderCards(data.news);
+        currentPage = page;
+
+        // Load more button: ocultar si no hay más páginas
+        const btn = document.getElementById('btnLoadMore');
+        const loaded = (page - 1) * 10 + data.news.length;
+        btn.disabled = loaded >= data.total;
+        btn.textContent = loaded >= data.total ?
+            (typeof t !== 'undefined' ? t('noticias.no_more') : 'No hay más noticias') :
+            (typeof t !== 'undefined' ? t('noticias.load_more') : 'Cargar más noticias');
+    }
+
+    /* ── Category filter ─────────────────────────────── */
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCat = btn.dataset.cat;
+            loadNews(currentCat, 1);
+        });
     });
 
-    /* ── Load more (simulated) ─────────────────────────── */
-    let page = 1;
-    document.getElementById('btnLoadMore').addEventListener('click', function() {
-      this.textContent = 'Cargando...';
-      this.disabled = true;
-      setTimeout(() => {
-        // In production: fetch next page from backend and append cards
-        this.textContent = 'No hay más noticias';
-        // this.disabled stays true — no more pages in demo
-      }, 800);
+    /* ── Load more ───────────────────────────────────── */
+    document.getElementById('btnLoadMore').addEventListener('click', () => {
+        loadNews(currentCat, currentPage + 1);
     });
+
+    /* ── Init ────────────────────────────────────────── */
+    loadNews('todas', 1);

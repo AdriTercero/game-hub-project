@@ -1,21 +1,13 @@
-/* ── Theme ─────────────────────────────────────────── */
-const html  = document.documentElement;
-const thBtn = document.getElementById('themeToggle');
-const saved = localStorage.getItem('gh-theme') || 'dark';
-html.setAttribute('data-theme', saved);
-thBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
-thBtn.addEventListener('click', () => {
-  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  thBtn.textContent = next === 'dark' ? '☀️' : '🌙';
-  localStorage.setItem('gh-theme', next);
-});
-
-/* ── Sidebar active ────────────────────────────────── */
-function setActive(el) {
+/* ── Sidebar active + panel switching ──────────────── */
+window.setActive = function(el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
-}
+  const panelId = el.dataset.panel;
+  if (!panelId) return;
+  document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+  const target = document.getElementById('panel-' + panelId);
+  if (target) target.style.display = 'block';
+};
 
 /* ── Data ──────────────────────────────────────────── */
 let QUEUE = [
@@ -101,7 +93,7 @@ function renderReviews() {
 }
 
 /* ── CU-03: publish directly ───────────────────────── */
-function publishNow(id) {
+window.publishNow = function(id) {
   const a = QUEUE.find(a => a.id === id);
   if (!a) return;
   a.status = 'Publicada';
@@ -112,7 +104,7 @@ function publishNow(id) {
 }
 
 /* ── Delete from queue ─────────────────────────────── */
-function deleteArticle(id) {
+window.deleteArticle = function(id) {
   const a = QUEUE.find(a => a.id === id);
   if (!a) return;
   QUEUE = QUEUE.filter(a => a.id !== id);
@@ -122,7 +114,7 @@ function deleteArticle(id) {
 }
 
 /* ── Approve collaborator article ──────────────────── */
-function approveReview(id) {
+window.approveReview = function(id) {
   const r = REVIEWS.find(r => r.id === id);
   if (!r) return;
   /* Redactor can publish directly — CU-03 */
@@ -140,7 +132,7 @@ function approveReview(id) {
 }
 
 /* ── Reject collaborator article ───────────────────── */
-function rejectReview(id) {
+window.rejectReview = function(id) {
   const r = REVIEWS.find(r => r.id === id);
   if (!r) return;
   REVIEWS = REVIEWS.filter(r => r.id !== id);
@@ -150,7 +142,7 @@ function rejectReview(id) {
 }
 
 /* ── Modal ─────────────────────────────────────────── */
-function openModal(id, mode) {
+window.openModal = function(id, mode) {
   modalMode = mode || 'new';
   editingId = id;
 
@@ -183,13 +175,13 @@ function openModal(id, mode) {
   }
 }
 
-function closeModal() {
+window.closeModal = function() {
   document.getElementById('modal').classList.remove('open');
   document.getElementById('modalOverlay').classList.remove('open');
 }
 
 /* ── Save / publish ────────────────────────────────── */
-function saveArticle(status) {
+window.saveArticle = function(status) {
   const title = document.getElementById('mTitle').value.trim();
   const cat   = document.getElementById('mCat').value;
   const read  = document.getElementById('mRead').value;

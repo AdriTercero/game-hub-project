@@ -1,25 +1,17 @@
 /* ═══════════════════════════════════════════════════════
    GameHub — Agenda / Calendario
-   Datos de eventos: reemplaza con fetch al backend cuando
-   esté disponible.
 ═══════════════════════════════════════════════════════ */
 
-const EVENTS = [
-  { id:1,  date:'2026-06-03', name:'Nintendo Direct',         type:'lanzamiento', location:'Online',          desc:'Presentación de los próximos lanzamientos de Nintendo para la segunda mitad de 2026.' },
-  { id:2,  date:'2026-06-06', name:'Lanzamiento Juego A',     type:'lanzamiento', location:'Global',           desc:'Salida oficial de Juego A en todas las plataformas.' },
-  { id:3,  date:'2026-06-10', name:'Summer Game Fest',        type:'feria',       location:'Los Ángeles, EE.UU.', desc:'Festival anual de videojuegos con anuncios de los principales estudios.' },
-  { id:4,  date:'2026-06-12', name:'PC Gaming Show',          type:'convencion',  location:'Los Ángeles, EE.UU.', desc:'Evento dedicado al gaming en PC con novedades de hardware y software.' },
-  { id:5,  date:'2026-06-16', name:'Gamelab Barcelona',       type:'feria',       location:'Barcelona, España',  desc:'Congreso internacional de la industria del videojuego en España.' },
-  { id:6,  date:'2026-06-20', name:'Lanzamiento Juego B',     type:'lanzamiento', location:'Global',           desc:'Lanzamiento de Juego B exclusivamente en PS5 y PC.' },
-  { id:7,  date:'2026-06-24', name:'EVO 2026',                type:'convencion',  location:'Las Vegas, EE.UU.',  desc:'El torneo de lucha más importante del mundo con los mejores competidores.' },
-  { id:8,  date:'2026-07-04', name:'Fun & Serious',           type:'feria',       location:'Bilbao, España',     desc:'Festival internacional del videojuego artístico e independiente.' },
-  { id:9,  date:'2026-07-10', name:'Lanzamiento Juego C',     type:'lanzamiento', location:'Global',           desc:'Esperado lanzamiento de Juego C, secuela de uno de los juegos más valorados del catálogo.' },
-  { id:10, date:'2026-07-15', name:'Gamescom Latam',          type:'feria',       location:'São Paulo, Brasil',  desc:'Edición latinoamericana de la mayor feria de videojuegos de Europa.' },
-  { id:11, date:'2026-07-22', name:'IndieGame Summit',        type:'convencion',  location:'Madrid, España',     desc:'Cumbre dedicada al desarrollo independiente de videojuegos.' },
-  { id:12, date:'2026-08-05', name:'Gamescom 2026',           type:'feria',       location:'Colonia, Alemania',  desc:'La mayor feria de videojuegos de Europa con más de 300.000 visitantes esperados.' },
-  { id:13, date:'2026-08-12', name:'Lanzamiento Juego D',     type:'lanzamiento', location:'Global',           desc:'Lanzamiento mundial de Juego D, disponible en todas las plataformas.' },
-  { id:14, date:'2026-08-20', name:'PAX West 2026',           type:'feria',       location:'Seattle, EE.UU.',    desc:'Evento de gaming para fans y desarrolladores en la costa oeste de EE.UU.' },
-];
+/* ── Get events ────────────────────────────────────────*/
+async function fetchEvents() {
+  const params = new URLSearchParams();
+  if (activeFilter !== 'all') params.set('type', activeFilter);
+  params.set('year',  currentYear);
+  params.set('month', currentMonth + 1); // JS es 0-indexed, backend espera 1-indexed
+  const res  = await fetch('/api/events?' + params);
+  const data = await res.json();
+  return data.events;
+}
 
 /* ── State ─────────────────────────────────────────── */
 const today    = new Date();
@@ -49,7 +41,7 @@ function formatDate(dateStr) {
 }
 
 /* ── Render calendar ───────────────────────────────── */
-function renderCalendar() {
+async function renderCalendar() {
   const grid      = document.getElementById('calGrid');
   const titleEl   = document.getElementById('calTitle');
   const headerDays = document.querySelectorAll('.cal-days-header div');
@@ -61,6 +53,7 @@ function renderCalendar() {
   headerDays.forEach((el, i) => { el.textContent = days[i]; });
 
   grid.innerHTML = '';
+  const EVENTS = await fetchEvents();
 
   // First day of month (Mon=0 ... Sun=6)
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
@@ -145,7 +138,7 @@ function renderCalendar() {
     grid.appendChild(cell);
   }
 
-  renderUpcoming();
+  renderUpcoming(EVENTS);
 }
 
 /* ── Event panel ───────────────────────────────────── */
@@ -180,7 +173,7 @@ function hideEventPanel() {
 }
 
 /* ── Upcoming list ─────────────────────────────────── */
-function renderUpcoming() {
+function renderUpcoming(EVENTS) {
   const list    = document.getElementById('upcomingList');
   const todayStr = today.toISOString().split('T')[0];
 
